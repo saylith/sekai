@@ -83,4 +83,9 @@ class Unit
         {
             return this.status = status;
         }
+
+        char getRepresentation()
+        {
+            return representation;
+        }
 }
