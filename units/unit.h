@@ -1,6 +1,11 @@
 #ifndef UNIT_H
 #define UNIT_H
 
+#include "armor.h"
+#include "weapon.h"
+#include "terrain.h"
+#include "status.h"
+
 class Unit
 {
     /**
@@ -12,8 +17,8 @@ class Unit
     int mp, maxMp;
     int actions;
 
-    WeaponType weaponType;
-    ArmorType armorType;
+    Weapon weapon;
+    Armor armor;
     TerrainBonuses terrainBonuses;
     Status status;
 
@@ -24,7 +29,7 @@ class Unit
         *   getAttackDamage
         *       Determines damage done to enemy
         */
-        int getAttackDamage(Unit enemy, Terrain terrain);
+        virtual int getAttackDamage(Unit enemy, Terrain terrain);
 
         /**
         *   Getters
@@ -38,8 +43,8 @@ class Unit
         int getActions();
         char getRepresentation();
 
-        WeaponType getWeaponType();
-        ArmorType getArmorType();
+        Weapon getWeapon();
+        Armor getArmor();
         TerrainBonuses getTerrainBonuses();
         Status getStatus();
 

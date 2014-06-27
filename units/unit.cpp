@@ -1,8 +1,5 @@
 #include "unit.h"
 
-
-int Unit::getAttackDamage(Unit enemy, Terrain terrain);
-
 int Unit::getMovement()
 {
     return movement;
@@ -35,13 +32,13 @@ char Unit::getRepresentation()
 {
     return representation;
 }
-WeaponType Unit::getWeaponType()
+Weapon Unit::getWeapon()
 {
-    return weaponType;
+    return weapon;
 }
-ArmorType Unit::getArmorType()
+Armor Unit::getArmor()
 {
-    return armorType;
+    return armor;
 }
 TerrainBonuses Unit::getTerrainBonuses()
 {
@@ -54,22 +51,22 @@ Status Unit::getStatus()
 
 int Unit::setMovement(int movement)
 {
-    return this.movement = movement;
+    return this->movement = movement;
 }
 int Unit::setHp(int hp)
 {
-    return this.hp = hp;
+    return this->hp = hp;
 }
 int Unit::setMp(int mp)
 {
-    return this.mp = mp;
+    return this->mp = mp;
 }
 int Unit::setActions(int actions)
 {
-    return this.actions = actions;
+    return this->actions = actions;
 }
 
 Status Unit::setStatus(Status status)
 {
-    return this.status = status;
+    return this->status = status;
 }
