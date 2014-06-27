@@ -1,91 +1,75 @@
-class Unit
+#include "unit.h"
+
+
+int Unit::getAttackDamage(Unit enemy, Terrain terrain);
+
+int Unit::getMovement()
 {
-    int movement;
-    int attack;
-    int hp, maxHp;
-    int mp, maxMp;
-    int actions;
+    return movement;
+}
+int Unit::getAttack()
+{
+    return attack;
+} 
+int Unit::getHp()
+{
+    return hp;
+}
+int Unit::getMaxHp()
+{
+    return maxHp;
+}
+int Unit::getMp()
+{
+    return mp;
+}
+int Unit::getMaxMp()
+{
+    return maxMp;
+}
+int Unit::getActions()
+{
+    return actions;
+}
+char Unit::getRepresentation()
+{
+    return representation;
+}
+WeaponType Unit::getWeaponType()
+{
+    return weaponType;
+}
+ArmorType Unit::getArmorType()
+{
+    return armorType;
+}
+TerrainBonuses Unit::getTerrainBonuses()
+{
+    return terrainBonuses;
+}
+Status Unit::getStatus()
+{
+    return status;
+}
 
-    WeaponType weaponType;
-    ArmorType armorType;
-    TerrainBonuses terrainBonuses;
-    Status status;
+int Unit::setMovement(int movement)
+{
+    return this.movement = movement;
+}
+int Unit::setHp(int hp)
+{
+    return this.hp = hp;
+}
+int Unit::setMp(int mp)
+{
+    return this.mp = mp;
+}
+int Unit::setActions(int actions)
+{
+    return this.actions = actions;
+}
 
-    char representation;
-
-    public:
-        int getAttackDamage(Unit enemy, Terrain terrain);
-
-        int getMovement()
-        {
-            return movement;
-        }
-        int getAttack()
-        {
-            return attack;
-        } 
-        int getHp()
-        {
-            return hp;
-        }
-        int getMaxHp()
-        {
-            return maxHp;
-        }
-        int getMp()
-        {
-            return mp;
-        }
-        int getMaxMp()
-        {
-            return maxMp;
-        }
-        int getActions()
-        {
-            return actions;
-        }
-
-        WeaponType getWeaponType()
-        {
-            return weaponType;
-        }
-        ArmorType getArmorType()
-        {
-            return armorType;
-        }
-        TerrainBonuses getTerrainBonuses()
-        {
-            return terrainBonuses;
-        }
-        Status getStatus()
-        {
-            return status;
-        }
-
-        int setMovement(int movement)
-        {
-            return this.movement = movement;
-        }
-        int setHp(int hp);
-        {
-            return this.hp = hp;
-        }
-        int setMp(int mp)
-        {
-            return this.mp = mp;
-        }
-        int setActions(int actions)
-        {
-            return this.actions = actions;
-        }
-
-        Status setStatus(Status status)
-        {
-            return this.status = status;
-        }
-
-        char getRepresentation()
-        {
-            return representation;
-        }
+Status Unit::setStatus(Status status)
+{
+    return this.status = status;
 }
