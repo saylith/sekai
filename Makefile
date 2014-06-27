@@ -1,12 +1,12 @@
 CC=g++
 CFLAGS=-c
-SFMLFLAGS=-lsfml-graphics -lsfml-window -lsfml-system
+LINKERFLAGS=-lsfml-graphics -lsfml-window -lsfml-system -lglut -lGL
 EXECUTABLE=sekai
 
 all: $(EXECUTABLE)
 
-$(EXECUTABLE): main.o 
-	$(CC) main.o -o $(EXECUTABLE) $(SFMLFLAGS)
+$(EXECUTABLE): main.o
+	$(CC) main.o -o $(EXECUTABLE) $(LINKERFLAGS)
 
 main.o: main.cpp
 	$(CC) $(CFLAGS) main.cpp
