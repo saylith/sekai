@@ -2,12 +2,13 @@ class Unit
 {
     int movement;
     int attack;
-    int hp;
-    int mp;
+    int hp, maxHp;
+    int mp, maxMp;
 
     WeaponType weaponType;
     ArmorType armorType;
     TerrainBonuses terrainBonuses;
+    Status status;
 
     char representation;
 
