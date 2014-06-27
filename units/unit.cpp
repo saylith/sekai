@@ -15,29 +15,72 @@ class Unit
 
     public:
         int getAttackDamage(Unit enemy, Terrain terrain);
-        int calculateDamageTaken(Unit enemy, Terrain terrain);
 
+        int getMovement()
+        {
+            return movement;
+        }
+        int getAttack()
+        {
+            return attack;
+        } 
+        int getHp()
+        {
+            return hp;
+        }
+        int getMaxHp()
+        {
+            return maxHp;
+        }
+        int getMp()
+        {
+            return mp;
+        }
+        int getMaxMp()
+        {
+            return maxMp;
+        }
+        int getActions()
+        {
+            return actions;
+        }
 
-        int getMovement();
-        int getAttack();
-        int getHp();
-        int getMaxHp();
-        int getMp();
-        int getMaxMP();
-        int getActions();
+        WeaponType getWeaponType()
+        {
+            return weaponType;
+        }
+        ArmorType getArmorType()
+        {
+            return armorType;
+        }
+        TerrainBonuses getTerrainBonuses()
+        {
+            return terrainBonuses;
+        }
+        Status getStatus()
+        {
+            return status;
+        }
 
-        WeaponType getWeaponType();
-        ArmorType getArmorType();
-        TerrainBonuses getTerrainBonuses();
-        Status getStatus();
+        int setMovement(int movement)
+        {
+            return this.movement = movement;
+        }
+        int setHp(int hp);
+        {
+            return this.hp = hp;
+        }
+        int setMp(int mp)
+        {
+            return this.mp = mp;
+        }
+        int setActions(int actions)
+        {
+            return this.actions = actions;
+        }
 
-        int setMovement();
-        int setAttack();
-        int setHp();
-        int setMaxHp();
-        int setMp();
-        int setMaxMP();
-        int setActions();
-
-        Status setStatus();
+        Status setStatus(Status status)
+        {
+            return this.status = status;
+        }
 }
