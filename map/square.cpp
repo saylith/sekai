@@ -4,10 +4,12 @@ Square::Square() {
 	this->x = 0;
 	this->y = 0;
 }
-
-Square::Square(int x, int y, Terrain terrain, Landmark landmark) {
+Square::Square(int x, int y, 
+	Unit unit, Terrain terrain, Landmark landmark) {
 	this->x = x;
 	this->y = y;
+	this->terrain = terrain;
+	this->landmark = landmark;
 }
 int Square::getX() {
 	return this->x;

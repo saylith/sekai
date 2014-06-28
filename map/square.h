@@ -1,14 +1,14 @@
 #ifndef SQUARE_H
 #define SQUARE_H
 
-//#include "../units/unit.h"
+#include "../units/unit.h"
+#include "../units/saylith.h"
 #include "landmark.h"
 #include "terrain.h"
 
 class Square
 {
-
-//	Unit occupant;
+	Unit occupant;
 	Terrain terrain;
 	Landmark landmark;
 
@@ -18,7 +18,7 @@ public:
 	Square();
 
 	Square(int x = 0, int y = 0, 
-		//Unit unit = Unit(),
+		Unit unit = Saylith(),
 		Terrain terrain = Terrain(), 
 		Landmark landmark = Landmark());
 

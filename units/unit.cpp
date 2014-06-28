@@ -1,5 +1,10 @@
 #include "unit.h"
 
+int Unit::getAttackDamage(Unit enemy, Terrain terrain)
+{
+    return 0;
+}
+
 int Unit::getMovement()
 {
     return movement;

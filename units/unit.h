@@ -29,7 +29,7 @@ class Unit
         *   getAttackDamage
         *       Determines damage done to enemy
         */
-        virtual int getAttackDamage(Unit enemy, Terrain terrain);
+        int getAttackDamage(Unit enemy, Terrain terrain);
 
         /**
         *   Getters
