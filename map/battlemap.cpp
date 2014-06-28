@@ -33,7 +33,7 @@ int BattleMap::setHeight(int height) {
 }
 
 Square* BattleMap::getSquareAt(int x, int y) {
-	return squares.at(x + width*y);
+	return squares.at(x*height + y);
 }
 
 std::string BattleMap::printMap() {
@@ -43,13 +43,14 @@ std::string BattleMap::printMap() {
 	for(int y = 0; y < height; y++) {
 		for(int x = 0; x < width; x++) {
 			ss << this->getSquareAt(x, y)->getRepresentation();
+//            ss << "(" << x << "," << y << ") ";
 		}
-		ss << std::endl;
+        ss << std::endl;
 	}
 	return ss.str();
 }
 
 int main() {
-	BattleMap map(30,10);
+	BattleMap map(10,3);
 	std::cout << map.printMap();
 }

@@ -24,5 +24,10 @@ int Square::setY(int y) {
 	return this->y = y;
 }
 char Square::getRepresentation() {
-	return 'o';
+    if(this->x == 0)
+    	return '0';
+    else if(this->x == 1)
+        return '1';
+    else
+        return 'x';
 }
