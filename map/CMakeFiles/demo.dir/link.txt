@@ -1,1 +1,0 @@
-/usr/bin/c++       CMakeFiles/demo.dir/battlemap.cpp.o CMakeFiles/demo.dir/square.cpp.o  -o demo  -L/home/anthony/sekai/units -rdynamic ../units/libunit.a -Wl,-rpath,/home/anthony/sekai/units 

@@ -1,3 +1,0 @@
-/home/anthony/sekai/CMakeFiles/main.dir
-/home/anthony/sekai/map/CMakeFiles/map.dir
-/home/anthony/sekai/units/CMakeFiles/units.dir

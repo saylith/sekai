@@ -73,14 +73,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/anthony/sekai/CMakeFiles /home/anthony/sekai/CMakeFiles/progress.marks
-	$(MAKE) -f CMakeFiles/Makefile2 all
+	cd /home/anthony/sekai && $(CMAKE_COMMAND) -E cmake_progress_start /home/anthony/sekai/CMakeFiles /home/anthony/sekai/battle/CMakeFiles/progress.marks
+	cd /home/anthony/sekai && $(MAKE) -f CMakeFiles/Makefile2 battle/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/anthony/sekai/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	$(MAKE) -f CMakeFiles/Makefile2 clean
+	cd /home/anthony/sekai && $(MAKE) -f CMakeFiles/Makefile2 battle/clean
 .PHONY : clean
 
 # The main clean target
@@ -89,94 +89,56 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	$(MAKE) -f CMakeFiles/Makefile2 preinstall
+	cd /home/anthony/sekai && $(MAKE) -f CMakeFiles/Makefile2 battle/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	$(MAKE) -f CMakeFiles/Makefile2 preinstall
+	cd /home/anthony/sekai && $(MAKE) -f CMakeFiles/Makefile2 battle/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	$(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/anthony/sekai && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
-#=============================================================================
-# Target rules for targets named main
+# Convenience name for target.
+battle/CMakeFiles/battle.dir/rule:
+	cd /home/anthony/sekai && $(MAKE) -f CMakeFiles/Makefile2 battle/CMakeFiles/battle.dir/rule
+.PHONY : battle/CMakeFiles/battle.dir/rule
 
-# Build rule for target.
-main: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 main
-.PHONY : main
-
-# fast build rule for target.
-main/fast:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/build
-.PHONY : main/fast
-
-#=============================================================================
-# Target rules for targets named map
-
-# Build rule for target.
-map: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 map
-.PHONY : map
-
-# fast build rule for target.
-map/fast:
-	$(MAKE) -f map/CMakeFiles/map.dir/build.make map/CMakeFiles/map.dir/build
-.PHONY : map/fast
-
-#=============================================================================
-# Target rules for targets named units
-
-# Build rule for target.
-units: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 units
-.PHONY : units
-
-# fast build rule for target.
-units/fast:
-	$(MAKE) -f units/CMakeFiles/units.dir/build.make units/CMakeFiles/units.dir/build
-.PHONY : units/fast
-
-#=============================================================================
-# Target rules for targets named battle
-
-# Build rule for target.
-battle: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 battle
+# Convenience name for target.
+battle: battle/CMakeFiles/battle.dir/rule
 .PHONY : battle
 
 # fast build rule for target.
 battle/fast:
-	$(MAKE) -f battle/CMakeFiles/battle.dir/build.make battle/CMakeFiles/battle.dir/build
+	cd /home/anthony/sekai && $(MAKE) -f battle/CMakeFiles/battle.dir/build.make battle/CMakeFiles/battle.dir/build
 .PHONY : battle/fast
 
-main.o: main.cpp.o
-.PHONY : main.o
+battle.o: battle.cpp.o
+.PHONY : battle.o
 
 # target to build an object file
-main.cpp.o:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/main.cpp.o
-.PHONY : main.cpp.o
+battle.cpp.o:
+	cd /home/anthony/sekai && $(MAKE) -f battle/CMakeFiles/battle.dir/build.make battle/CMakeFiles/battle.dir/battle.cpp.o
+.PHONY : battle.cpp.o
 
-main.i: main.cpp.i
-.PHONY : main.i
+battle.i: battle.cpp.i
+.PHONY : battle.i
 
 # target to preprocess a source file
-main.cpp.i:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/main.cpp.i
-.PHONY : main.cpp.i
+battle.cpp.i:
+	cd /home/anthony/sekai && $(MAKE) -f battle/CMakeFiles/battle.dir/build.make battle/CMakeFiles/battle.dir/battle.cpp.i
+.PHONY : battle.cpp.i
 
-main.s: main.cpp.s
-.PHONY : main.s
+battle.s: battle.cpp.s
+.PHONY : battle.s
 
 # target to generate assembly for a file
-main.cpp.s:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/main.cpp.s
-.PHONY : main.cpp.s
+battle.cpp.s:
+	cd /home/anthony/sekai && $(MAKE) -f battle/CMakeFiles/battle.dir/build.make battle/CMakeFiles/battle.dir/battle.cpp.s
+.PHONY : battle.cpp.s
 
 # Help Target
 help:
@@ -184,15 +146,12 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... edit_cache"
-	@echo "... main"
-	@echo "... rebuild_cache"
-	@echo "... map"
-	@echo "... units"
 	@echo "... battle"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
+	@echo "... edit_cache"
+	@echo "... rebuild_cache"
+	@echo "... battle.o"
+	@echo "... battle.i"
+	@echo "... battle.s"
 .PHONY : help
 
 
@@ -204,6 +163,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	$(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/anthony/sekai && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 
