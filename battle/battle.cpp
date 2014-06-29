@@ -44,6 +44,9 @@ void Battle::keyboardRight() {
 		case UNIT_SELECTION:
 			bm.moveFocus(BattleMap::EAST);
 			break;
+		case UNIT_SELECTED:
+			bm.moveUnit(BattleMap::EAST);
+			break;
 		case MAIN_MENU:
 			menuSelectionIndex = (menuSelectionIndex + 1) % menu.size();
 			break;
@@ -56,6 +59,9 @@ void Battle::keyboardUp() {
 switch(currentAction){
 		case UNIT_SELECTION:
 			bm.moveFocus(BattleMap::NORTH);
+			break;
+		case UNIT_SELECTED:
+			bm.moveUnit(BattleMap::NORTH);
 			break;
 		case MAIN_MENU:
 			menuSelectionIndex = 
@@ -70,6 +76,9 @@ switch(currentAction){
 		case UNIT_SELECTION:
 			bm.moveFocus(BattleMap::WEST);
 			break;
+		case UNIT_SELECTED:
+			bm.moveUnit(BattleMap::WEST);
+			break;
 		case MAIN_MENU:
 			menuSelectionIndex = 
 				(menu.size() + menuSelectionIndex - 1) % menu.size();
@@ -82,6 +91,9 @@ void Battle::keyboardDown() {
 switch(currentAction){
 		case UNIT_SELECTION:
 			bm.moveFocus(BattleMap::SOUTH);
+			break;
+		case UNIT_SELECTED:
+			bm.moveUnit(BattleMap::SOUTH);
 			break;
 		case MAIN_MENU:
 			menuSelectionIndex = (menuSelectionIndex + 1) % menu.size();

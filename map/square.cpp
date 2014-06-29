@@ -1,24 +1,27 @@
 #include "square.h"
 
 Square::Square() {
-	this->x = 0;
-	this->y = 0;
+	this->coords.x = 0;
+	this->coords.y = 0;
 	this->state = '.';
 }
 Square::Square(int x, int y,
 	Terrain terrain, Landmark landmark, Unit *occupant) {
-	this->x = x;
-	this->y = y;
+	this->coords.x = x;
+	this->coords.y = y;
 	this->terrain = terrain;
 	this->landmark = landmark;
 	this->occupant = occupant;
 	this->state = '.';
 }
 int Square::getX() {
-	return this->x;
+	return this->coords.x;
 }
 int Square::getY() {
-	return this->y;
+	return this->coords.y;
+}
+Square::Coords Square::getCoords() {
+	return this->coords;
 }
 bool Square::isFocused() {
 	return this->state == 'f';
@@ -30,10 +33,13 @@ bool Square::isHighlighted() {
 	return this->state == 'h';
 }
 int Square::setX(int x) {
-	return this->x = x;
+	return this->coords.x = x;
 }
 int Square::setY(int y) {
-	return this->y = y;
+	return this->coords.y = y;
+}
+Square::Coords Square::setCoords(Square::Coords coords) {
+	return this->coords = coords;
 }
 char Square::setFocused() {
 	return this->state = 'f';
@@ -62,6 +68,6 @@ Unit *Square::setUnit(Unit *unit) {
 
 char Square::getRepresentation() {
 	if(this->getUnit() != 0)
-		return 'o';
+		return this->getUnit()->getRepresentation();
 	return this->state;
 }

@@ -19,7 +19,7 @@ BattleMap::BattleMap(int width, int height){
 	}
 	focus = squares.front();
 	focus->setFocused();
-	squares.at(16)->setUnit(new Saylith());
+	squares.at(10)->setUnit(new Saylith());
 }
 
 int BattleMap::getWidth() {
@@ -38,6 +38,10 @@ int BattleMap::setHeight(int height) {
 
 Square* BattleMap::getSquareAt(int x, int y) {
 	return squares.at(x*height + y);
+}
+
+Square* BattleMap::getSquareAt(Square::Coords coords) {
+	return this->getSquareAt(coords.x, coords.y);
 }
 
 std::string BattleMap::printMap() {
@@ -63,33 +67,53 @@ Square *BattleMap::setFocus(int x, int y) {
 	return this->focus;
 }
 
-Square *BattleMap::moveFocus(int direction) {
-	int currentX = this->focus->getX();
-	int currentY = this->focus->getY();
-	int newX = currentX, newY = currentY;
+Square *BattleMap::setFocus(Square::Coords coords) {
+	return this->setFocus(coords.x, coords.y);
+}
+
+Square *BattleMap::moveFocus(Direction direction) {
+	Square::Coords oldCoords = this->focus->getCoords();
+
 	Square *ret = NULL;
+	Square::Coords newCoords = 
+		this->getValidCoordinatesInDirection(oldCoords, direction);
+	ret = this->setFocus(newCoords);
+	return ret;
+}
+
+Square *BattleMap::moveUnit(Direction direction) {
+	Unit *unit = this->focus->getUnit();
+	this->focus->setUnit(NULL);
+
+	moveFocus(direction);
+
+	this->focus->setUnit(unit);
+	return this->focus;
+}
+
+Square::Coords BattleMap::getValidCoordinatesInDirection(
+	Square::Coords coords, Direction direction) {
 	switch(direction) {
 		case EAST:
 			// Right
-			newX = std::min(currentX + 1, this->width-1);
+			coords.x = std::min(coords.x + 1, this->width-1);
 			break;
 		case NORTH:
 			// Up
-			newY = std::max(currentY - 1, 0);
+			coords.y = std::max(coords.y - 1, 0);
 			break;
 		case WEST:
 			// Left
-			newX = std::max(currentX - 1, 0);
+			coords.x = std::max(coords.x - 1, 0);
 			break;
 		case SOUTH:
 			// Down
-			newY = std::min(currentY + 1, this->height-1);
+			coords.y = std::min(coords.y + 1, this->height-1);
 			break;
 		default:
 			break;
 	}
-	ret = this->setFocus(newX, newY);
-	return ret;
+	return coords;
 }
 
 Square *BattleMap::confirm() {

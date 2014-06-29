@@ -11,11 +11,13 @@ class Square
 	Unit *occupant;
 	Terrain terrain;
 	Landmark landmark;
-
-	int x, y;
 	char state;
 
 public:
+	struct Coords {
+		int x, y;	
+	} coords;
+
 	Square();
 
 	Square(int x = 0, int y = 0,
@@ -25,12 +27,14 @@ public:
 
 	int getX();
 	int getY();
+	Coords getCoords();
 	bool isFocused();
 	bool isSelected();
 	bool isHighlighted();
 
 	int setX(int x);
 	int setY(int y);
+	Coords setCoords(Coords coords);
 
 	char setFocused();
 

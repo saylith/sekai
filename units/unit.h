@@ -22,7 +22,8 @@ class Unit
     TerrainBonuses terrainBonuses;
     Status status;
 
-    char representation;
+    protected:
+        char representation;
 
     public:
         /**
