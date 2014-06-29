@@ -1,11 +1,18 @@
 #include "battle.h"
 
 Battle::Battle() {
-	bm = BattleMap(5, 3);
+	bm = BattleMap(25, 10);
+	currentAction = UNIT_SELECTION;
+	turn = 0;
+	menu = "";
 }
 
 std::string Battle::getMap() {
 	return bm.printMap();
+}
+
+std::string Battle::getMenu() {
+	return menu;
 }
 
 void Battle::keyboardRight() {
@@ -50,7 +57,8 @@ void Battle::keyboardZ() {
 switch(currentAction){
 		case UNIT_SELECTION:
 			bm.confirm();
-			currentAction = UNIT_MENU;
+			currentAction = MAIN_MENU;
+			menu = "MAIN MENU\nUnits\nObjectives\nEnd Turn";
 			break;
 		default:
 			break;
@@ -58,9 +66,10 @@ switch(currentAction){
 }
 void Battle::keyboardX() {
 switch(currentAction){
-		case UNIT_MENU:
+		case MAIN_MENU:
 			currentAction = UNIT_SELECTION;
 			bm.cancel();
+			menu = "";
 			break;
 		default:
 			break;

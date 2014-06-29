@@ -11,12 +11,14 @@ class Battle
 
 	BattleMap bm;
 	int turn;
+	std::string menu;
 	Action currentAction;
 
 public:
 	Battle();
 
 	std::string getMap();
+	std::string getMenu();
 
 	void keyboardRight();
 	void keyboardUp();

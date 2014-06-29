@@ -21,14 +21,18 @@ int main()
         // check all the window's events that were triggered since the last iteration of the loop
         sf::Event event;
         sf::Text textMap;
-        sf::Text Menu;
+        sf::Text textMenu;
         sf::Font font;
         font.loadFromFile("UbuntuMono-R.ttf");
         textMap.setFont(font);
+        textMenu.setFont(font);
         textMap.setString(battle.getMap());
+        textMenu.setString(battle.getMenu());
         textMap.setCharacterSize(24);
+        textMenu.setCharacterSize(18);
         textMap.setColor(sf::Color::White);
-
+        textMenu.setColor(sf::Color::Cyan);
+        textMenu.setPosition(350, 0);
         while (window.pollEvent(event))
         {
             switch (event.type) {
@@ -44,6 +48,7 @@ int main()
         }
         window.clear();
         window.draw(textMap);
+        window.draw(textMenu);
         window.display();
     }
 
