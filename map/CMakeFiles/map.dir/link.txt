@@ -1,0 +1,2 @@
+/usr/bin/ar cr libmap.a  CMakeFiles/map.dir/battlemap.cpp.o CMakeFiles/map.dir/square.cpp.o
+/usr/bin/ranlib libmap.a

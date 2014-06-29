@@ -1,0 +1,2 @@
+/usr/bin/ar cr libunits.a  CMakeFiles/units.dir/unit.cpp.o CMakeFiles/units.dir/saylith.cpp.o
+/usr/bin/ranlib libunits.a

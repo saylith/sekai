@@ -1,0 +1,1 @@
+/usr/bin/c++       CMakeFiles/main.dir/main.cpp.o  -o main  -L/home/anthony/sekai/units  -L/home/anthony/sekai/map -rdynamic -lsfml-system -lsfml-window -lsfml-graphics -lsfml-audio map/libmap.a units/libunits.a -Wl,-rpath,/home/anthony/sekai/units:/home/anthony/sekai/map 
