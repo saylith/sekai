@@ -11,7 +11,10 @@ class BattleMap
 	int width;
 	int height;
 	std::vector<Square *> squares;
+	std::vector<Square *> possibleMoves;
+	std::vector<Square *> path;
 	Square* focus;
+
 
 public:
 	enum Direction {
@@ -35,14 +38,34 @@ public:
 
 	Square *setFocus(int x, int y);
 	Square *setFocus(Square::Coords coords);
+	Square *getFocus();
 	Square *moveFocus(Direction direction);
-	Square *moveUnit(Direction direction);
+	Square *moveUnit(Square::Coords source, Square::Coords dest);
+	Square *movePath(Direction);
+
+	void calculatePossibleMoves(Square *selection);
+
 	Square *confirm();
 	Square *cancel();
 
+	void confirmUnitSelection();
+
+	void confirmUnitDestination();
+
+	void confirmUnitWait();
+
+	void cancelMainMenu();
+
+	void cancelUnitSelection();
+
+	void cancelUnitMenu();
+
 private:
-	Square::Coords getValidCoordinatesInDirection(Square::Coords coords, 
-		Direction direction);
+	Square::Coords getValidCoordsInDirection(Square::Coords coords, 
+		Direction direction, Unit *myUnit = NULL);
+	void calculatePossibleMoves(Square *selection, Unit *myUnit, int remaining);
+	void clearPossibleMoves();
+	void clearPath();
 };
 
 #endif

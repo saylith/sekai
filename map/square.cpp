@@ -3,7 +3,7 @@
 Square::Square() {
 	this->coords.x = 0;
 	this->coords.y = 0;
-	this->state = '.';
+	this->state = NONE;
 }
 Square::Square(int x, int y,
 	Terrain terrain, Landmark landmark, Unit *occupant) {
@@ -12,7 +12,7 @@ Square::Square(int x, int y,
 	this->terrain = terrain;
 	this->landmark = landmark;
 	this->occupant = occupant;
-	this->state = '.';
+	this->state = NONE;
 }
 int Square::getX() {
 	return this->coords.x;
@@ -23,14 +23,11 @@ int Square::getY() {
 Square::Coords Square::getCoords() {
 	return this->coords;
 }
-bool Square::isFocused() {
-	return this->state == 'f';
-}
 bool Square::isSelected() {
-	return this->state == 's';
+	return this->state == SELECTED;
 }
 bool Square::isHighlighted() {
-	return this->state == 'h';
+	return this->state == HIGHLIGHTED;
 }
 int Square::setX(int x) {
 	return this->coords.x = x;
@@ -41,17 +38,17 @@ int Square::setY(int y) {
 Square::Coords Square::setCoords(Square::Coords coords) {
 	return this->coords = coords;
 }
-char Square::setFocused() {
-	return this->state = 'f';
-}
 char Square::setSelected() {
-	return this->state = 's';
+	return this->state = SELECTED;
 }
 char Square::setHighlighted() {
-	return this->state = 'h';
+	return this->state = HIGHLIGHTED;
 }
 char Square::resetState() {
-	return this->state = '.';
+	return this->state = NONE;
+}
+char Square::setState(Square::State state) {
+	return this->state = state;
 }
 
 bool Square::isOccupied() {
@@ -69,5 +66,9 @@ Unit *Square::setUnit(Unit *unit) {
 char Square::getRepresentation() {
 	if(this->getUnit() != 0)
 		return this->getUnit()->getRepresentation();
+	return this->state;
+}
+
+Square::State Square::getState() {
 	return this->state;
 }

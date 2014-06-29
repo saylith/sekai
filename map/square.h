@@ -11,9 +11,15 @@ class Square
 	Unit *occupant;
 	Terrain terrain;
 	Landmark landmark;
-	char state;
-
+	
 public:
+	enum State {
+		SELECTED = 's',
+		HIGHLIGHTED = 'h',
+		PATH = 'p',
+		NONE = '.'
+	} state;
+
 	struct Coords {
 		int x, y;	
 	} coords;
@@ -28,7 +34,6 @@ public:
 	int getX();
 	int getY();
 	Coords getCoords();
-	bool isFocused();
 	bool isSelected();
 	bool isHighlighted();
 
@@ -36,13 +41,14 @@ public:
 	int setY(int y);
 	Coords setCoords(Coords coords);
 
-	char setFocused();
 
 	char setSelected();
 
 	char setHighlighted();
 
 	char resetState();
+	char setState(State state);
+	State getState();
 
 	Unit *getUnit();
 	Unit *setUnit(Unit *unit);

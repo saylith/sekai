@@ -11,19 +11,20 @@ class Unit
     /**
     *   Member variables
     */
-    int movement;
-    int attack;
-    int hp, maxHp;
-    int mp, maxMp;
-    int actions;
 
-    Weapon weapon;
-    Armor armor;
-    TerrainBonuses terrainBonuses;
-    Status status;
 
     protected:
         char representation;
+        int movement;
+        int attack;
+        int hp, maxHp;
+        int mp, maxMp;
+        int actions;
+
+        Weapon weapon;
+        Armor armor;
+        TerrainBonuses terrainBonuses;
+        Status status;
 
     public:
         /**

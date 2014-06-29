@@ -16,8 +16,12 @@ Battle::Battle() {
 	mainMenu.push_back("Suspend");
 	mainMenu.push_back("End Turn");
 
+	unitMenu = std::vector<std::string>();
+	unitMenu.push_back("Wait");
+
 	menu = blankMenu;
-	menuSelectionIndex = 0;
+	mainMenuSelectionIndex = 0;
+	unitMenuSelectionIndex = 0;
 }
 
 std::string Battle::getMap() {
@@ -25,6 +29,11 @@ std::string Battle::getMap() {
 }
 
 std::string Battle::getMenu() {
+	int menuSelectionIndex;
+	if(currentAction == MAIN_MENU)
+		menuSelectionIndex = mainMenuSelectionIndex;
+	else if(currentAction == UNIT_MENU)
+		menuSelectionIndex = unitMenuSelectionIndex;
 	if(menu.size() == 0)
 		return "";
 
@@ -45,10 +54,11 @@ void Battle::keyboardRight() {
 			bm.moveFocus(BattleMap::EAST);
 			break;
 		case UNIT_SELECTED:
-			bm.moveUnit(BattleMap::EAST);
+			bm.movePath(BattleMap::EAST);
 			break;
 		case MAIN_MENU:
-			menuSelectionIndex = (menuSelectionIndex + 1) % menu.size();
+			mainMenuSelectionIndex = 
+				(mainMenuSelectionIndex + 1) % menu.size();
 			break;
 		default:
 			break;
@@ -61,11 +71,11 @@ switch(currentAction){
 			bm.moveFocus(BattleMap::NORTH);
 			break;
 		case UNIT_SELECTED:
-			bm.moveUnit(BattleMap::NORTH);
+			bm.movePath(BattleMap::NORTH);
 			break;
 		case MAIN_MENU:
-			menuSelectionIndex = 
-				(menu.size() + menuSelectionIndex - 1) % menu.size();
+			mainMenuSelectionIndex = 
+				(menu.size() + mainMenuSelectionIndex - 1) % menu.size();
 			break;
 		default:
 			break;
@@ -77,11 +87,11 @@ switch(currentAction){
 			bm.moveFocus(BattleMap::WEST);
 			break;
 		case UNIT_SELECTED:
-			bm.moveUnit(BattleMap::WEST);
+			bm.movePath(BattleMap::WEST);
 			break;
 		case MAIN_MENU:
-			menuSelectionIndex = 
-				(menu.size() + menuSelectionIndex - 1) % menu.size();
+			mainMenuSelectionIndex = 
+				(menu.size() + mainMenuSelectionIndex - 1) % menu.size();
 			break;
 		default:
 			break;
@@ -93,10 +103,11 @@ switch(currentAction){
 			bm.moveFocus(BattleMap::SOUTH);
 			break;
 		case UNIT_SELECTED:
-			bm.moveUnit(BattleMap::SOUTH);
+			bm.movePath(BattleMap::SOUTH);
 			break;
 		case MAIN_MENU:
-			menuSelectionIndex = (menuSelectionIndex + 1) % menu.size();
+			mainMenuSelectionIndex = 
+				(mainMenuSelectionIndex + 1) % menu.size();
 			break;
 		default:
 			break;
@@ -110,6 +121,7 @@ void Battle::keyboardZ() {
 			if (bm.confirm()->isSelected()) {
 				currentAction = UNIT_SELECTED;
 				menu = blankMenu;
+				bm.confirmUnitSelection();
 			}
 			else {
 				currentAction = MAIN_MENU;
@@ -117,6 +129,18 @@ void Battle::keyboardZ() {
 			}
 			break;
 		}
+		case UNIT_SELECTED:
+			currentAction = UNIT_MENU;
+			menu = unitMenu;
+			bm.confirmUnitDestination();
+			break;
+		case UNIT_MENU:
+			if (unitMenuSelectionIndex == 0) {
+				currentAction = UNIT_SELECTION;
+				menu = blankMenu;
+				bm.confirmUnitWait();
+			}
+			break;
 		default:
 			break;
 	}
@@ -125,13 +149,18 @@ void Battle::keyboardX() {
 switch(currentAction){
 		case MAIN_MENU:
 			currentAction = UNIT_SELECTION;
-			bm.cancel();
 			menu = blankMenu;
 			break;
 		case UNIT_SELECTED:
 			currentAction = UNIT_SELECTION;
-			bm.cancel();
 			menu = blankMenu;
+			bm.cancelUnitSelection();
+			break;
+		case UNIT_MENU:
+			currentAction = UNIT_SELECTED;
+			menu = blankMenu;
+			bm.cancelUnitMenu();
+			break;
 		default:
 			break;
 	}

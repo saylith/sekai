@@ -6,7 +6,11 @@
 class Battle
 {
 	enum Action {
-		UNIT_SELECTION, UNIT_SELECTED, UNIT_MENU, MAIN_MENU, BUSY
+		UNIT_SELECTION, 
+		UNIT_SELECTED, 
+		UNIT_MENU, 
+		MAIN_MENU, 
+		BUSY
 	};
 
 	BattleMap bm;
@@ -17,7 +21,9 @@ class Battle
 	std::vector<std::string> menu;
 	std::vector<std::string> blankMenu;
 	std::vector<std::string> mainMenu;
-	int menuSelectionIndex;
+	std::vector<std::string> unitMenu;
+	int mainMenuSelectionIndex;
+	int unitMenuSelectionIndex;
 
 	Action currentAction;
 
@@ -35,6 +41,5 @@ public:
 	void keyboardX();
 	void keyboardA();
 	void keyboardS();
-
 };
 #endif
