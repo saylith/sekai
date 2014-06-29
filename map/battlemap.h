@@ -10,6 +10,7 @@ class BattleMap
 	int width;
 	int height;
 	std::vector<Square *> squares;
+	Square* focus;
 
 public:
 	BattleMap();
@@ -22,9 +23,11 @@ public:
 	int setWidth(int width);
 	int setHeight(int height);
 
-	Square* getSquareAt(int x, int y);
+	Square *getSquareAt(int x, int y);
 
 	std::string printMap();
+	Square *setFocus(int x, int y);
+	Square *moveFocus(int direction);
 };
 
 #endif

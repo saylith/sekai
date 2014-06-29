@@ -5,6 +5,7 @@
 BattleMap::BattleMap(){
 	width = 0;
 	height = 0;
+	focus = NULL;
 }
 
 BattleMap::BattleMap(int width, int height){
@@ -16,6 +17,8 @@ BattleMap::BattleMap(int width, int height){
 			squares.push_back(square);
 		}
 	}
+	focus = squares.front();
+	focus->setFocused();
 }
 
 int BattleMap::getWidth() {
@@ -50,7 +53,40 @@ std::string BattleMap::printMap() {
 	return ss.str();
 }
 
-int main() {
-	BattleMap map(10,3);
-	std::cout << map.printMap();
+Square *BattleMap::setFocus(int x, int y) {
+	this->focus->resetState();
+	this->focus = NULL;
+	this->focus = getSquareAt(x, y);
+	this->focus->setFocused();
+
+	return this->focus;
+}
+
+Square *BattleMap::moveFocus(int direction) {
+	int currentX = this->focus->getX();
+	int currentY = this->focus->getY();
+	int newX = currentX, newY = currentY;
+	Square *ret = NULL;
+	switch(direction) {
+		case 0:
+			// Right
+			newX = std::min(currentX + 1, this->width-1);
+			break;
+		case 1:
+			// Up
+			newY = std::max(currentY - 1, 0);
+			break;
+		case 2:
+			// Left
+			newX = std::max(currentX - 1, 0);
+			break;
+		case 3:
+			// Down
+			newY = std::min(currentY + 1, this->height-1);
+			break;
+		default:
+			break;
+	}
+	ret = this->setFocus(newX, newY);
+	return ret;
 }

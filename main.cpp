@@ -1,44 +1,65 @@
 #include <SFML/Window.hpp>
-#include <SFML/OpenGL.hpp>
+#include <SFML/Graphics.hpp>
+#include "map/battlemap.h"
+
+void handleKeyboardEvent(BattleMap *map);
 
 int main()
 {
-    // create the window
-    sf::Window window(sf::VideoMode(1280, 1024), "OpenGL", sf::Style::Default, sf::ContextSettings(32));
-    window.setVerticalSyncEnabled(true);
+    sf::RenderWindow window(sf::VideoMode(800, 600), "My window");
 
-    // load resources, initialize the OpenGL states, ...
+    sf::Text text;
+    text.setString("test");
+    text.setCharacterSize(24);
 
-    // run the main loop
-    bool running = true;
-    while (running)
+    BattleMap map(10,3);
+
+    // run the program as long as the window is open
+    while (window.isOpen())
     {
-        // handle events
+        // check all the window's events that were triggered since the last iteration of the loop
         sf::Event event;
+        sf::Text textMap;
+        sf::Text Menu;
+        sf::Font font;
+        font.loadFromFile("UbuntuMono-R.ttf");
+        textMap.setFont(font);
+        textMap.setString(map.printMap());
+        textMap.setCharacterSize(24);
+        textMap.setColor(sf::Color::White);
+
         while (window.pollEvent(event))
         {
-            if (event.type == sf::Event::Closed)
-            {
-                // end the program
-                running = false;
-            }
-            else if (event.type == sf::Event::Resized)
-            {
-                // adjust the viewport when the window is resized
-                glViewport(0, 0, event.size.width, event.size.height);
+            switch (event.type) {
+                case sf::Event::Closed:
+                    window.close();
+                    break;
+                case sf::Event::KeyPressed:
+                    handleKeyboardEvent(&map);
+                    break;
+                default:
+                    break;
             }
         }
-
-        // clear the buffers
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-        // draw...
-
-        // end the current frame (internally swaps the front and back buffers)
+        window.clear();
+        window.draw(textMap);
         window.display();
     }
 
-    // release resources...
-
     return 0;
+}
+
+void handleKeyboardEvent(BattleMap *map) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+        map->moveFocus(0);
+    }
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+        map->moveFocus(1);
+    }
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+        map->moveFocus(2);
+    }
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+       map->moveFocus(3);
+    }
 }

@@ -103,25 +103,25 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-map/CMakeFiles/demo.dir/rule:
-	cd /home/anthony/sekai && $(MAKE) -f CMakeFiles/Makefile2 map/CMakeFiles/demo.dir/rule
-.PHONY : map/CMakeFiles/demo.dir/rule
+map/CMakeFiles/map.dir/rule:
+	cd /home/anthony/sekai && $(MAKE) -f CMakeFiles/Makefile2 map/CMakeFiles/map.dir/rule
+.PHONY : map/CMakeFiles/map.dir/rule
 
 # Convenience name for target.
-demo: map/CMakeFiles/demo.dir/rule
-.PHONY : demo
+map: map/CMakeFiles/map.dir/rule
+.PHONY : map
 
 # fast build rule for target.
-demo/fast:
-	cd /home/anthony/sekai && $(MAKE) -f map/CMakeFiles/demo.dir/build.make map/CMakeFiles/demo.dir/build
-.PHONY : demo/fast
+map/fast:
+	cd /home/anthony/sekai && $(MAKE) -f map/CMakeFiles/map.dir/build.make map/CMakeFiles/map.dir/build
+.PHONY : map/fast
 
 battlemap.o: battlemap.cpp.o
 .PHONY : battlemap.o
 
 # target to build an object file
 battlemap.cpp.o:
-	cd /home/anthony/sekai && $(MAKE) -f map/CMakeFiles/demo.dir/build.make map/CMakeFiles/demo.dir/battlemap.cpp.o
+	cd /home/anthony/sekai && $(MAKE) -f map/CMakeFiles/map.dir/build.make map/CMakeFiles/map.dir/battlemap.cpp.o
 .PHONY : battlemap.cpp.o
 
 battlemap.i: battlemap.cpp.i
@@ -129,7 +129,7 @@ battlemap.i: battlemap.cpp.i
 
 # target to preprocess a source file
 battlemap.cpp.i:
-	cd /home/anthony/sekai && $(MAKE) -f map/CMakeFiles/demo.dir/build.make map/CMakeFiles/demo.dir/battlemap.cpp.i
+	cd /home/anthony/sekai && $(MAKE) -f map/CMakeFiles/map.dir/build.make map/CMakeFiles/map.dir/battlemap.cpp.i
 .PHONY : battlemap.cpp.i
 
 battlemap.s: battlemap.cpp.s
@@ -137,7 +137,7 @@ battlemap.s: battlemap.cpp.s
 
 # target to generate assembly for a file
 battlemap.cpp.s:
-	cd /home/anthony/sekai && $(MAKE) -f map/CMakeFiles/demo.dir/build.make map/CMakeFiles/demo.dir/battlemap.cpp.s
+	cd /home/anthony/sekai && $(MAKE) -f map/CMakeFiles/map.dir/build.make map/CMakeFiles/map.dir/battlemap.cpp.s
 .PHONY : battlemap.cpp.s
 
 square.o: square.cpp.o
@@ -145,7 +145,7 @@ square.o: square.cpp.o
 
 # target to build an object file
 square.cpp.o:
-	cd /home/anthony/sekai && $(MAKE) -f map/CMakeFiles/demo.dir/build.make map/CMakeFiles/demo.dir/square.cpp.o
+	cd /home/anthony/sekai && $(MAKE) -f map/CMakeFiles/map.dir/build.make map/CMakeFiles/map.dir/square.cpp.o
 .PHONY : square.cpp.o
 
 square.i: square.cpp.i
@@ -153,7 +153,7 @@ square.i: square.cpp.i
 
 # target to preprocess a source file
 square.cpp.i:
-	cd /home/anthony/sekai && $(MAKE) -f map/CMakeFiles/demo.dir/build.make map/CMakeFiles/demo.dir/square.cpp.i
+	cd /home/anthony/sekai && $(MAKE) -f map/CMakeFiles/map.dir/build.make map/CMakeFiles/map.dir/square.cpp.i
 .PHONY : square.cpp.i
 
 square.s: square.cpp.s
@@ -161,7 +161,7 @@ square.s: square.cpp.s
 
 # target to generate assembly for a file
 square.cpp.s:
-	cd /home/anthony/sekai && $(MAKE) -f map/CMakeFiles/demo.dir/build.make map/CMakeFiles/demo.dir/square.cpp.s
+	cd /home/anthony/sekai && $(MAKE) -f map/CMakeFiles/map.dir/build.make map/CMakeFiles/map.dir/square.cpp.s
 .PHONY : square.cpp.s
 
 # Help Target
@@ -170,8 +170,8 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... demo"
 	@echo "... edit_cache"
+	@echo "... map"
 	@echo "... rebuild_cache"
 	@echo "... battlemap.o"
 	@echo "... battlemap.i"

@@ -103,30 +103,67 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named demo
+# Target rules for targets named main
 
 # Build rule for target.
-demo: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 demo
-.PHONY : demo
+main: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 main
+.PHONY : main
 
 # fast build rule for target.
-demo/fast:
-	$(MAKE) -f map/CMakeFiles/demo.dir/build.make map/CMakeFiles/demo.dir/build
-.PHONY : demo/fast
+main/fast:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/build
+.PHONY : main/fast
 
 #=============================================================================
-# Target rules for targets named unit
+# Target rules for targets named map
 
 # Build rule for target.
-unit: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 unit
-.PHONY : unit
+map: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 map
+.PHONY : map
 
 # fast build rule for target.
-unit/fast:
-	$(MAKE) -f units/CMakeFiles/unit.dir/build.make units/CMakeFiles/unit.dir/build
-.PHONY : unit/fast
+map/fast:
+	$(MAKE) -f map/CMakeFiles/map.dir/build.make map/CMakeFiles/map.dir/build
+.PHONY : map/fast
+
+#=============================================================================
+# Target rules for targets named units
+
+# Build rule for target.
+units: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 units
+.PHONY : units
+
+# fast build rule for target.
+units/fast:
+	$(MAKE) -f units/CMakeFiles/units.dir/build.make units/CMakeFiles/units.dir/build
+.PHONY : units/fast
+
+main.o: main.cpp.o
+.PHONY : main.o
+
+# target to build an object file
+main.cpp.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/main.cpp.o
+.PHONY : main.cpp.o
+
+main.i: main.cpp.i
+.PHONY : main.i
+
+# target to preprocess a source file
+main.cpp.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/main.cpp.i
+.PHONY : main.cpp.i
+
+main.s: main.cpp.s
+.PHONY : main.s
+
+# target to generate assembly for a file
+main.cpp.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/main.cpp.s
+.PHONY : main.cpp.s
 
 # Help Target
 help:
@@ -135,9 +172,13 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... edit_cache"
+	@echo "... main"
 	@echo "... rebuild_cache"
-	@echo "... demo"
-	@echo "... unit"
+	@echo "... map"
+	@echo "... units"
+	@echo "... main.o"
+	@echo "... main.i"
+	@echo "... main.s"
 .PHONY : help
 
 
