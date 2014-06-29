@@ -29,9 +29,9 @@ int main()
         textMap.setString(battle.getMap());
         textMenu.setString(battle.getMenu());
         textMap.setCharacterSize(24);
-        textMenu.setCharacterSize(18);
+        textMenu.setCharacterSize(24);
         textMap.setColor(sf::Color::White);
-        textMenu.setColor(sf::Color::Cyan);
+        textMenu.setColor(sf::Color::White);
         textMenu.setPosition(350, 0);
         while (window.pollEvent(event))
         {

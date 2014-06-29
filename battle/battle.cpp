@@ -1,10 +1,23 @@
 #include "battle.h"
+#include <sstream>
+#include <iostream>
+
 
 Battle::Battle() {
 	bm = BattleMap(25, 10);
 	currentAction = UNIT_SELECTION;
 	turn = 0;
-	menu = "";
+	
+	blankMenu = std::vector<std::string>();
+	
+	mainMenu = std::vector<std::string>();
+	mainMenu.push_back("Unit List");
+	mainMenu.push_back("Conditions");
+	mainMenu.push_back("Suspend");
+	mainMenu.push_back("End Turn");
+
+	menu = blankMenu;
+	menuSelectionIndex = 0;
 }
 
 std::string Battle::getMap() {
@@ -12,13 +25,27 @@ std::string Battle::getMap() {
 }
 
 std::string Battle::getMenu() {
-	return menu;
+	if(menu.size() == 0)
+		return "";
+
+	std::stringstream ss;
+	for(int i = 0; i < menu.size(); i++) {
+		if(i == menuSelectionIndex)
+			ss << ">";
+		else
+			ss << " ";
+		ss << menu.at(i) << std::endl;
+	}
+	return ss.str();
 }
 
 void Battle::keyboardRight() {
 	switch(currentAction){
 		case UNIT_SELECTION:
-			bm.moveFocus(0);
+			bm.moveFocus(BattleMap::EAST);
+			break;
+		case MAIN_MENU:
+			menuSelectionIndex = (menuSelectionIndex + 1) % menu.size();
 			break;
 		default:
 			break;
@@ -28,7 +55,11 @@ void Battle::keyboardRight() {
 void Battle::keyboardUp() {
 switch(currentAction){
 		case UNIT_SELECTION:
-			bm.moveFocus(1);
+			bm.moveFocus(BattleMap::NORTH);
+			break;
+		case MAIN_MENU:
+			menuSelectionIndex = 
+				(menu.size() + menuSelectionIndex - 1) % menu.size();
 			break;
 		default:
 			break;
@@ -37,7 +68,11 @@ switch(currentAction){
 void Battle::keyboardLeft() {
 switch(currentAction){
 		case UNIT_SELECTION:
-			bm.moveFocus(2);
+			bm.moveFocus(BattleMap::WEST);
+			break;
+		case MAIN_MENU:
+			menuSelectionIndex = 
+				(menu.size() + menuSelectionIndex - 1) % menu.size();
 			break;
 		default:
 			break;
@@ -46,7 +81,10 @@ switch(currentAction){
 void Battle::keyboardDown() {
 switch(currentAction){
 		case UNIT_SELECTION:
-			bm.moveFocus(3);
+			bm.moveFocus(BattleMap::SOUTH);
+			break;
+		case MAIN_MENU:
+			menuSelectionIndex = (menuSelectionIndex + 1) % menu.size();
 			break;
 		default:
 			break;
@@ -54,12 +92,19 @@ switch(currentAction){
 }
 
 void Battle::keyboardZ() {
-switch(currentAction){
-		case UNIT_SELECTION:
-			bm.confirm();
-			currentAction = MAIN_MENU;
-			menu = "MAIN MENU\nUnits\nObjectives\nEnd Turn";
+	switch(currentAction) {
+		case UNIT_SELECTION: {
+			
+			if (bm.confirm()->isSelected()) {
+				currentAction = UNIT_SELECTED;
+				menu = blankMenu;
+			}
+			else {
+				currentAction = MAIN_MENU;
+				menu = mainMenu;
+			}
 			break;
+		}
 		default:
 			break;
 	}
@@ -69,8 +114,12 @@ switch(currentAction){
 		case MAIN_MENU:
 			currentAction = UNIT_SELECTION;
 			bm.cancel();
-			menu = "";
+			menu = blankMenu;
 			break;
+		case UNIT_SELECTED:
+			currentAction = UNIT_SELECTION;
+			bm.cancel();
+			menu = blankMenu;
 		default:
 			break;
 	}

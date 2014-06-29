@@ -8,7 +8,7 @@
 
 class Square
 {
-	Unit occupant;
+	Unit *occupant;
 	Terrain terrain;
 	Landmark landmark;
 
@@ -19,9 +19,9 @@ public:
 	Square();
 
 	Square(int x = 0, int y = 0,
-		Unit unit = Saylith(),
 		Terrain terrain = Terrain(), 
-		Landmark landmark = Landmark());
+		Landmark landmark = Landmark(),
+		Unit *occupant = 0);
 
 	int getX();
 	int getY();
@@ -39,6 +39,10 @@ public:
 	char setHighlighted();
 
 	char resetState();
+
+	Unit *getUnit();
+	Unit *setUnit(Unit *unit);
+	bool isOccupied();
 
 	char getRepresentation();
 };

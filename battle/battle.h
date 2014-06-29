@@ -6,12 +6,19 @@
 class Battle
 {
 	enum Action {
-		UNIT_SELECTION, UNIT_MENU, MAIN_MENU, BUSY
+		UNIT_SELECTION, UNIT_SELECTED, UNIT_MENU, MAIN_MENU, BUSY
 	};
 
 	BattleMap bm;
+	
 	int turn;
-	std::string menu;
+	int numPlayers;
+
+	std::vector<std::string> menu;
+	std::vector<std::string> blankMenu;
+	std::vector<std::string> mainMenu;
+	int menuSelectionIndex;
+
 	Action currentAction;
 
 public:

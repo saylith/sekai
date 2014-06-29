@@ -5,14 +5,22 @@
 #include <string>
 #include <vector>
 
+
 class BattleMap
 {
+
+
+
 	int width;
 	int height;
 	std::vector<Square *> squares;
 	Square* focus;
 
 public:
+	enum Direction {
+		NORTH, SOUTH, EAST, WEST
+	};
+	
 	BattleMap();
 
 	BattleMap(int width, int height);

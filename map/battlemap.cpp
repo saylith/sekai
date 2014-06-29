@@ -19,6 +19,7 @@ BattleMap::BattleMap(int width, int height){
 	}
 	focus = squares.front();
 	focus->setFocused();
+	squares.at(16)->setUnit(new Saylith());
 }
 
 int BattleMap::getWidth() {
@@ -68,19 +69,19 @@ Square *BattleMap::moveFocus(int direction) {
 	int newX = currentX, newY = currentY;
 	Square *ret = NULL;
 	switch(direction) {
-		case 0:
+		case EAST:
 			// Right
 			newX = std::min(currentX + 1, this->width-1);
 			break;
-		case 1:
+		case NORTH:
 			// Up
 			newY = std::max(currentY - 1, 0);
 			break;
-		case 2:
+		case WEST:
 			// Left
 			newX = std::max(currentX - 1, 0);
 			break;
-		case 3:
+		case SOUTH:
 			// Down
 			newY = std::min(currentY + 1, this->height-1);
 			break;
@@ -92,9 +93,14 @@ Square *BattleMap::moveFocus(int direction) {
 }
 
 Square *BattleMap::confirm() {
-	this->focus->setSelected();
+	if(this->focus->isOccupied()) {
+		this->focus->setSelected();
+
+	}
 	return this->focus;
 }
+
+
 
 Square *BattleMap::cancel() {
 	this->focus->setFocused();
