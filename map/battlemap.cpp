@@ -90,3 +90,13 @@ Square *BattleMap::moveFocus(int direction) {
 	ret = this->setFocus(newX, newY);
 	return ret;
 }
+
+Square *BattleMap::confirm() {
+	this->focus->setSelected();
+	return this->focus;
+}
+
+Square *BattleMap::cancel() {
+	this->focus->setFocused();
+	return this->focus;
+}

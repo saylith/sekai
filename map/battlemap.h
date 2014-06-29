@@ -28,6 +28,9 @@ public:
 	std::string printMap();
 	Square *setFocus(int x, int y);
 	Square *moveFocus(int direction);
+
+	Square *confirm();
+	Square *cancel();
 };
 
 #endif

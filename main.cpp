@@ -2,7 +2,9 @@
 #include <SFML/Graphics.hpp>
 #include "map/battlemap.h"
 
-void handleKeyboardEvent(BattleMap *map);
+void handleKeyboardEvent();
+
+BattleMap bm;
 
 int main()
 {
@@ -12,7 +14,7 @@ int main()
     text.setString("test");
     text.setCharacterSize(24);
 
-    BattleMap map(10,3);
+    bm = BattleMap(10,3);
 
     // run the program as long as the window is open
     while (window.isOpen())
@@ -24,7 +26,7 @@ int main()
         sf::Font font;
         font.loadFromFile("UbuntuMono-R.ttf");
         textMap.setFont(font);
-        textMap.setString(map.printMap());
+        textMap.setString(bm.printMap());
         textMap.setCharacterSize(24);
         textMap.setColor(sf::Color::White);
 
@@ -35,7 +37,7 @@ int main()
                     window.close();
                     break;
                 case sf::Event::KeyPressed:
-                    handleKeyboardEvent(&map);
+                    handleKeyboardEvent();
                     break;
                 default:
                     break;
@@ -49,17 +51,23 @@ int main()
     return 0;
 }
 
-void handleKeyboardEvent(BattleMap *map) {
+void handleKeyboardEvent() {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-        map->moveFocus(0);
+        bm.moveFocus(0);
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-        map->moveFocus(1);
+        bm.moveFocus(1);
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-        map->moveFocus(2);
+        bm.moveFocus(2);
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-       map->moveFocus(3);
+        bm.moveFocus(3);
+    }
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z)) {
+        bm.confirm();
+    }
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::X)) {
+        bm.cancel();
     }
 }
