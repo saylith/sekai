@@ -7,3 +7,4 @@ main
 *.cmake
 *CMakeFiles*
 CMakeCache.txt
+*Makefile
