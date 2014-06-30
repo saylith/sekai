@@ -57,7 +57,8 @@ class Unit
 
         enum Gender {
             MALE,
-            FEMALE
+            FEMALE,
+            NA //Inorganic units would not be applicable for gender, added option for this
         };
         Gender getGender();
         Gender setGender(Gender gender);

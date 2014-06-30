@@ -1,8 +1,17 @@
+/*
+ * Generalized unit class: to be used as a parent for all other units
+ */
+
 #include "unit.h"
 
 Unit::Stats Unit::getStats() {
     return this->stats;
 }
+
+/*
+ * setStats Method should be used in initializing a unit.
+ * Use setMOR, setGEN, setATK, setTEC, setLUK, setMOV when changing outside of initialization
+ */
 Unit::Stats Unit::setStats(
     int mor, int gen, int atk, int tec, int luk, int mov) {
     this->stats.MOR = mor;
