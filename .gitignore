@@ -1,0 +1,9 @@
+sekai
+main
+*.o
+*.swp
+.*
+*.a
+*.cmake
+*CMakeFiles*
+CMakeCache.txt
