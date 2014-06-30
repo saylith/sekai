@@ -2,6 +2,7 @@
 
 Saylith::Saylith() {
 	this->setStats(2000, 10, 10, 10, 10, 4);
+	this->setMOV(4);
 	this->setWeapon(Unit::SWORD);
 	this->setArmor(Unit::LIGHT);
 	this->setType(Unit::FOOT);
