@@ -3,7 +3,7 @@
 
 #include "armor.h"
 #include "weapon.h"
-#include "terrain.h"
+#include "../map/terrain.h"
 #include "status.h"
 
 class Unit
@@ -12,6 +12,32 @@ class Unit
     *   Member variables
     */
 
+    struct Stats {
+        int MOR; // Morale: the Unit's HP
+        int GEN; // General: Charge and Counter damage, skill defense
+        int ATK; // Attack: Damage over time, Morale damage
+        int TEC; // Technique: Charge and Counter reduction, skill effectiveness
+        int LUK; // Luck: Chance for criticals
+    } stats;
+
+    enum Weapon {
+        SWORD, AXE, LANCE, BOW, CROSSBOW, GUN, WAND, STAFF, TOME
+    } weapon;
+
+    enum Armor {
+        LIGHT, HEAVY, CLOTH
+    } armor;
+
+    enum Type {
+        FOOT, MOUNT, AIR
+    } type;
+
+    enum Gender {
+        MALE,
+        FEMALE
+    }
+
+    //Terrain::TerrainBonuses tb;
 
     protected:
         char representation;
