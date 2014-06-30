@@ -142,7 +142,7 @@ int Unit::getAttackDamage(Unit enemy, Terrain terrain)
 
 int Unit::getMovement()
 {
-    return this->getMovement();
+    return 4;
 }
 char Unit::getRepresentation()
 {
