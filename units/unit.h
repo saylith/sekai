@@ -1,91 +1,97 @@
 #ifndef UNIT_H
 #define UNIT_H
 
-#include "armor.h"
-#include "weapon.h"
 #include "../map/terrain.h"
-#include "status.h"
 
 class Unit
 {
-    /**
-    *   Member variables
-    */
+    public:
+        struct Stats {
+            int MOR; // Morale: the Unit's HP
+            int GEN; // General: Charge and Counter damage, skill defense
+            int ATK; // Attack: Damage over time, Morale damage
+            int TEC; // Technique: Charge and Counter reduction, skill effectiveness
+            int LUK; // Luck: Chance for criticals
+            int MOV; // Movement: number of spaces per turn
+        };
 
-    struct Stats {
-        int MOR; // Morale: the Unit's HP
-        int GEN; // General: Charge and Counter damage, skill defense
-        int ATK; // Attack: Damage over time, Morale damage
-        int TEC; // Technique: Charge and Counter reduction, skill effectiveness
-        int LUK; // Luck: Chance for criticals
-    } stats;
+        Stats getStats();
+        Stats setStats(int mor, int gen, int atk, int tec, int luk, int mov);
+        int getMOR();
+        int getGEN();
+        int getATK();
+        int getTEC();
+        int getLUK();
+        int getMOV();
 
-    enum Weapon {
-        SWORD, AXE, LANCE, BOW, CROSSBOW, GUN, WAND, STAFF, TOME
-    } weapon;
+        int setMOR(int mor);
+        int setGEN(int gen);
+        int setATK(int atk);
+        int setTEC(int tec);
+        int setLUK(int luk);
+        int setMOV(int mov);        
 
-    enum Armor {
-        LIGHT, HEAVY, CLOTH
-    } armor;
+        enum Weapon {
+            SWORD, AXE, LANCE, 
+            BOW, CROSSBOW, GUN, 
+            WAND, STAFF, TOME
+        };
 
-    enum Type {
-        FOOT, MOUNT, AIR
-    } type;
+        Weapon getWeapon();
+        Weapon setWeapon(Weapon weapon);
+        bool isMelee();
+        bool isRanged();
+        bool isMagic();
 
-    enum Gender {
-        MALE,
-        FEMALE
-    }
+        enum Armor {
+            LIGHT, HEAVY, CLOTH
+        };
+        Armor getArmor();
+        Armor setArmor(Armor armor);
 
-    //Terrain::TerrainBonuses tb;
+        enum Type {
+            FOOT, MOUNT, AIR
+        };
+        Type getType();
+        Type setType(Type type);
+
+        enum Gender {
+            MALE,
+            FEMALE
+        };
+        Gender getGender();
+        Gender setGender(Gender gender);
+
+        enum Status {
+            SLEEP,
+            POISON,
+            SLOW,
+            WEAK,
+            SILENCE,
+            STUN,
+            NONE
+        };
+        Status getStatus();
+        Status setStatus(Status status);
+
+        int getAttackDamage(Unit enemy, Terrain terrain);
+        int getMovement();
+        char getRepresentation();
+        bool isAce();
+        bool setAce(bool ace);
+
+    private:
+        Stats stats;
+        Weapon weapon;
+        Armor armor;
+        Type type;
+        Gender gender;
+        Status status;
+        bool ace;
+        // Terrain::TerrainBonuses terrainBonus;
 
     protected:
         char representation;
-        int movement;
-        int attack;
-        int hp, maxHp;
-        int mp, maxMp;
-        int actions;
-
-        Weapon weapon;
-        Armor armor;
-        TerrainBonuses terrainBonuses;
-        Status status;
-
-    public:
-        /**
-        *   getAttackDamage
-        *       Determines damage done to enemy
-        */
-        int getAttackDamage(Unit enemy, Terrain terrain);
-
-        /**
-        *   Getters
-        */
-        int getMovement();
-        int getAttack();
-        int getHp();
-        int getMaxHp();
-        int getMp();
-        int getMaxMp();
-        int getActions();
-        char getRepresentation();
-
-        Weapon getWeapon();
-        Armor getArmor();
-        TerrainBonuses getTerrainBonuses();
-        Status getStatus();
-
-        /**
-        *   Setters
-        */
-        int setMovement(int movement);
-        int setHp(int hp);
-        int setMp(int mp);
-        int setActions(int actions);
-        Status setStatus(Status status);
-
-        
 };
 
 #endif

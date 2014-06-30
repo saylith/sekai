@@ -1,5 +1,140 @@
 #include "unit.h"
 
+Unit::Stats Unit::getStats() {
+    return this->stats;
+}
+Unit::Stats Unit::setStats(
+    int mor, int gen, int atk, int tec, int luk, int mov) {
+    this->stats.MOR = mor;
+    this->stats.GEN = gen;
+    this->stats.ATK = atk;
+    this->stats.TEC = tec;
+    this->stats.LUK = luk;
+    this->stats.MOV = mov;
+    return this->stats;
+}
+int Unit::getMOR() {
+    return this->stats.MOR;
+}
+int Unit::getGEN() {
+    return this->stats.GEN;
+}
+int Unit::getATK() {
+    return this->stats.ATK;
+}
+int Unit::getTEC() {
+    return this->stats.TEC;
+}
+int Unit::getLUK() {
+    return this->stats.LUK;
+}
+int Unit::getMOV() {
+    return this->stats.MOV;
+}
+int Unit::setMOR(int mor) {
+    return this->stats.MOR = mor;
+}
+int Unit::setGEN(int gen) {
+    return this->stats.GEN = gen;
+}
+int Unit::setATK(int atk) {
+    return this->stats.ATK = atk;
+}
+int Unit::setTEC(int tec) {
+    return this->stats.TEC = tec;
+}
+int Unit::setLUK(int luk) {
+    return this->stats.LUK = luk;
+}
+int Unit::setMOV(int mov) {
+    return this->stats.MOV = mov;
+}
+
+Unit::Weapon Unit::getWeapon() {
+    return this->weapon;
+}
+Unit::Weapon Unit::setWeapon(Weapon weapon) {
+    return this->weapon = weapon;
+}
+bool Unit::isMelee() {
+    switch(this->weapon) {
+        case Unit::SWORD:
+            return true;
+            break;
+        case Unit::AXE:
+            return true;
+            break;
+        case Unit::LANCE:
+            return true;
+            break;
+        default:
+            return false;
+            break;
+    }
+}
+bool Unit::isRanged() {
+    switch(this->weapon) {
+        case Unit::BOW:
+            return false;
+            break;
+        case Unit::CROSSBOW:
+            return false;
+            break;
+        case Unit::GUN:
+            return false;
+            break;    
+        default:
+            return false;
+            break;
+    }
+}
+bool Unit::isMagic(){
+    switch(this->weapon) {
+        case Unit::WAND:
+            return false;
+            break;
+        case Unit::STAFF:
+            return false;
+            break;
+        case Unit::TOME:
+            return false;
+            break;    
+        default:
+            return false;
+            break;
+    }
+}
+Unit::Armor Unit::getArmor() {
+    return this->armor;
+}
+Unit::Armor Unit::setArmor(Unit::Armor) {
+    return this->armor = armor;
+}
+Unit::Type Unit::getType() {
+    return this->type;
+}
+Unit::Type Unit::setType(Unit::Type type) {
+    return this->type = type;
+}
+Unit::Gender Unit::getGender() {
+    return this->gender;
+}
+Unit::Gender Unit::setGender(Unit::Gender gender) {
+    return this->gender = gender;
+}
+Unit::Status Unit::getStatus() {
+    return this->status;
+}
+Unit::Status Unit::setStatus(Unit::Status status) {
+    return this->status = status;
+}
+bool Unit::isAce() {
+    return this->ace;
+}
+bool Unit::setAce(bool ace) {
+    return this->ace = ace;
+}
+
 int Unit::getAttackDamage(Unit enemy, Terrain terrain)
 {
     return 0;
@@ -7,71 +142,9 @@ int Unit::getAttackDamage(Unit enemy, Terrain terrain)
 
 int Unit::getMovement()
 {
-    return movement;
-}
-int Unit::getAttack()
-{
-    return attack;
-} 
-int Unit::getHp()
-{
-    return hp;
-}
-int Unit::getMaxHp()
-{
-    return maxHp;
-}
-int Unit::getMp()
-{
-    return mp;
-}
-int Unit::getMaxMp()
-{
-    return maxMp;
-}
-int Unit::getActions()
-{
-    return actions;
+    return this->getMovement();
 }
 char Unit::getRepresentation()
 {
     return representation;
-}
-Weapon Unit::getWeapon()
-{
-    return weapon;
-}
-Armor Unit::getArmor()
-{
-    return armor;
-}
-TerrainBonuses Unit::getTerrainBonuses()
-{
-    return terrainBonuses;
-}
-Status Unit::getStatus()
-{
-    return status;
-}
-
-int Unit::setMovement(int movement)
-{
-    return this->movement = movement;
-}
-int Unit::setHp(int hp)
-{
-    return this->hp = hp;
-}
-int Unit::setMp(int mp)
-{
-    return this->mp = mp;
-}
-int Unit::setActions(int actions)
-{
-    return this->actions = actions;
-}
-
-Status Unit::setStatus(Status status)
-{
-    return this->status = status;
 }
