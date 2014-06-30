@@ -75,13 +75,13 @@ bool Unit::isMelee() {
 bool Unit::isRanged() {
     switch(this->weapon) {
         case Unit::BOW:
-            return false;
+            return true;
             break;
         case Unit::CROSSBOW:
-            return false;
+            return true;
             break;
         case Unit::GUN:
-            return false;
+            return true;
             break;    
         default:
             return false;
@@ -91,13 +91,13 @@ bool Unit::isRanged() {
 bool Unit::isMagic(){
     switch(this->weapon) {
         case Unit::WAND:
-            return false;
+            return true;
             break;
         case Unit::STAFF:
-            return false;
+            return true;
             break;
         case Unit::TOME:
-            return false;
+            return true;
             break;    
         default:
             return false;
