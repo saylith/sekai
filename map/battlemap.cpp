@@ -1,3 +1,11 @@
+/*
+ * Object which holds data relevant to the map upon which a battle takes place
+ * does this by creating a vector of Square objects
+ * Coordinates in the grid are defined as x*height + y (which seems wrong to me, Saylith, can you sketch a visualization of this  perhaps?)
+ *
+ * Currently defaults to placing two "Saylith" units at positions 10 and 36
+ */
+
 #include "battlemap.h"
 #include <sstream>
 #include <iostream>

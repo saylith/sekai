@@ -1,3 +1,10 @@
+/*
+ * Object that holds data for a battle between factions
+ *
+ * Currently defaults to 25x10 battlemap in the constructor
+ *
+ */
+
 #include "battle.h"
 #include <sstream>
 #include <iostream>

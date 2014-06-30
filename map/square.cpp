@@ -1,3 +1,8 @@
+/*
+ * Square Object, which contains all data relevant to a single square on a battlemap object
+ * including cooridnates, any terrain or landmark data, occupant (as the address of the occupant object), and the state of the square itself
+ */
+
 #include "square.h"
 
 Square::Square() {
