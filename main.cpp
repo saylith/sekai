@@ -41,15 +41,25 @@ int main()
         textMenu.setPosition(350, 0);
 
         sf::Image image;
-        image.loadFromFile("map/terrain_sprites/generic.png");
+        image.loadFromFile("map/terrain_sprites/grass.png");
         image.createMaskFromColor(sf::Color(0,255,0,255));
 
-        sf::Texture texture;
-        texture.loadFromImage(image, sf::IntRect(0,0,144,144));
+        sf::Texture texture1;
+        texture1.loadFromImage(image, sf::IntRect(0,0,144,144));
+        texture1.setSmooth(false);
 
-        sf::Sprite sprite;
-        sprite.setTexture(texture);
-        sprite.setColor(sf::Color(0,255,0));
+        sf::Texture texture2;
+        texture2.loadFromImage(image, sf::IntRect(288,0,144,144));
+
+        sf::Sprite sprite1;
+        sprite1.setTexture(texture1);
+        sprite1.setPosition(50, 71);
+        //sprite.setColor(sf::Color(0,255,0));
+
+        sf::Sprite sprite2;
+        sprite2.setTexture(texture2);
+        sprite2.setPosition(50, 50);
+        //sprite.setColor(sf::Color(0,255,0));
 
         while (window.pollEvent(event))
         {
@@ -66,7 +76,13 @@ int main()
         }
         window.clear();
         window.draw(textMap);
-        window.draw(sprite);
+        window.draw(sprite1);
+        window.draw(sprite2);
+
+        sprite1.move(sf::Vector2f(50,32));
+        sprite2.move(sf::Vector2f(50,32));
+        window.draw(sprite1);
+        window.draw(sprite2);
         window.draw(textMenu);
 
         //window.draw(sprite);
