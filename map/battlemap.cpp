@@ -62,7 +62,7 @@ std::string BattleMap::printMap() {
 
 	for(int y = 0; y < height; y++) {
 		for(int x = 0; x < width; x++) {
-			if(this->focus->coords.x == x && this->focus->coords.y == y)
+			if(this->focus->getX() == x && this->focus->getY() == y)
 				ss << "f";
 			else
 				ss << this->getSquareAt(x, y)->getRepresentation();
@@ -102,7 +102,7 @@ Square *BattleMap::moveUnit(Square::Coords source, Square::Coords dest) {
 
 Square *BattleMap::movePath(Direction direction) {
 
-	Square::Coords dest = getValidCoordsInDirection(this->focus->coords,
+	Square::Coords dest = getValidCoordsInDirection(this->focus->getCoords(),
 	 direction, this->focus->getUnit());
 
 	Square::State state = this->getSquareAt(dest)->getState();

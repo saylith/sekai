@@ -18,11 +18,17 @@ public:
 		HIGHLIGHTED = 'h',
 		PATH = 'p',
 		NONE = '.'
-	} state;
+	};
 
 	struct Coords {
 		int x, y;	
-	} coords;
+	};
+
+private:
+	State state;
+	Coords coords;
+
+public:
 
 	Square();
 
