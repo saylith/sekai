@@ -1,10 +1,10 @@
 /* Generalized Terrain class, to be used as a parent for all terrain types
  * The terrain class contains all information relevant to the terrain of a square TODO: Add z-movement attribute to unit class
- * 		Z: A Z level (travel should be limited to 1 z level by default)
- * 		Stair: : A stair property (NONE, NW, NE, SW, SE) permits travel up any number of levels for foot type units
+ * 		z: A Z level (travel should be limited to 1 z level by default)
+ * 		isStair: : A stair property (NONE = 0, NW/SE = 1, NE/SW = 2) permits travel up any number of levels for foot type units
  * 			(does not need to be specified, should just universally permit movement in that direction)
- * 		Cost: A Movement Penalty: Number to be removed from the unit's available movement when the unit moves INTO the square
- * 		Representation: a way of representing the tile (char or image file or what have you)
+ * 		cost: A Movement Penalty: Number to be removed from the unit's available movement when the unit moves INTO the square
+ * 		representation: a way of representing the tile (char or image file or what have you)
  */
 #include "terrain.h"
 
