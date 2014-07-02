@@ -247,3 +247,14 @@ void BattleMap::cancelUnitSelection() {
 void BattleMap::cancelUnitMenu() {
 
 }
+
+std::vector<sf::Sprite> BattleMap::getSprites() {
+	std::vector<sf::Sprite> sprites;
+	for (int y = this->height-1; y >= 0; y--)
+		for(int x = 0; x < this->width; x++) {
+			for(sf::Sprite sprite : this->getSquareAt(x, y)->getSprites()) 
+				sprites.push_back(sprite);
+		}
+		        
+	return sprites;
+}

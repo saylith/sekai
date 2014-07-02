@@ -2,8 +2,6 @@
 #define BATTLEMAP_H
 
 #include "square.h"
-#include <string>
-#include <vector>
 
 
 class BattleMap
@@ -59,6 +57,8 @@ public:
 	void cancelUnitSelection();
 
 	void cancelUnitMenu();
+
+	std::vector<sf::Sprite> getSprites();
 
 private:
 	Square::Coords getValidCoordsInDirection(Square::Coords coords, 

@@ -58,6 +58,8 @@ public:
 
 	Terrain getTerrain();
 	Terrain setTerrain(Terrain terrain);
+
+	std::vector<sf::Sprite> getSprites();
 };
 
 #endif

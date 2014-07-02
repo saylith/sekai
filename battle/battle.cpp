@@ -11,7 +11,7 @@
 
 
 Battle::Battle() {
-	bm = BattleMap(25, 10);
+	bm = BattleMap(4, 10);
 	currentAction = UNIT_SELECTION;
 	turn = 0;
 	
@@ -56,15 +56,16 @@ std::string Battle::getMenu() {
 }
 
 std::vector<sf::Sprite> Battle::drawMap() {
-	std::vector<sf::Sprite> sprites;
-	sprites.push_back(this->bm.getSquareAt(0,0)->getTerrain().getSprite(0,1,1));
-	sprites.push_back(this->bm.getSquareAt(0,0)->getTerrain().getSprite(-1,0,1));
-	sprites.push_back(this->bm.getSquareAt(0,0)->getTerrain().getSprite(0,0,1));
-	sprites.push_back(this->bm.getSquareAt(0,0)->getTerrain().getSprite(0,0,0));
-	sprites.push_back(this->bm.getSquareAt(0,0)->getTerrain().getSprite(1,0,1));
-	sprites.push_back(this->bm.getSquareAt(0,0)->getTerrain().getSprite(1,0,0));
-	sprites.push_back(this->bm.getSquareAt(0,0)->getTerrain().getSprite(0,-1,1));
-	return sprites;
+	// std::vector<sf::Sprite> sprites;
+	// sprites.push_back(Terrain::getSprite(0,1,1, Terrain::GRASS));
+	// sprites.push_back(Terrain::getSprite(-1,0,1, Terrain::GRASS));
+	// sprites.push_back(Terrain::getSprite(0,0,1, Terrain::GRASS));
+	// sprites.push_back(Terrain::getSprite(0,0,0, Terrain::GRASS));
+	// sprites.push_back(Terrain::getSprite(1,0,1, Terrain::GRASS));
+	// sprites.push_back(Terrain::getSprite(1,0,0, Terrain::GRASS));
+	// sprites.push_back(Terrain::getSprite(0,-1,1, Terrain::GRASS));
+	// return sprites;
+	return bm.getSprites();
 }
 
 void Battle::keyboardRight() {

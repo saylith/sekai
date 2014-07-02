@@ -85,3 +85,12 @@ Terrain Square::getTerrain() {
 Terrain Square::setTerrain(Terrain terrain) {
 	return this->terrain = terrain;
 }
+
+std::vector<sf::Sprite> Square::getSprites() {
+	std::vector<sf::Sprite> sprites;
+	sprites.push_back(Terrain::getSprite(
+		this->coords.x, this->coords.y, 1, Terrain::GRASS));
+	sprites.push_back(Terrain::getSprite(
+		this->coords.x, this->coords.y, 0, Terrain::GRASS));
+	return sprites;
+}

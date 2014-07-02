@@ -18,7 +18,7 @@ int main()
     text.setString("test");
     text.setCharacterSize(24);
 
-    // run the program as long as the window is open
+    //run the program as long as the window is open
     while (window.isOpen())
     {
         // check all the window's events that were triggered since the last iteration of the loop
@@ -39,12 +39,13 @@ int main()
         textMenu.setColor(sf::Color::White);
 
         textMap.setString(battle.getMap());
+        textMap.setPosition(-100, -100);
         textMenu.setString(battle.getMenu());
 
         textMenu.setPosition(350, 0);
 
         sf::View mapView(sf::FloatRect(-200, 
-            -200, 1000, 1000));
+            -400, 1000, 1000));
 
         window.setView(mapView);
         mapView.setViewport(sf::FloatRect(0,0,1,1));
@@ -63,22 +64,15 @@ int main()
             }
         }
         window.clear();
-      //  window.draw(textMap);
-      //  window.draw(textMenu);
+        window.draw(textMap);
+        window.draw(textMenu);
 
         std::vector<sf::Sprite> spriteMap = battle.drawMap();
-
         for(sf::Sprite sprite : spriteMap) {
             window.draw(sprite);
         }
         window.display();
     }
-
-    return 0;
-}
-
-int test () {
-    std::vector<sf::Sprite> spriteMap = battle.drawMap();
 
     return 0;
 }
