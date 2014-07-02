@@ -39,7 +39,7 @@ sf::Sprite Terrain::getSprite(int x, int y, int h, TerrainType tt) {
 	
 	sf::Sprite sprite;
 	sprite.setTexture(*texture);
-	sprite.setPosition(x*50 + y*50, -y*30 + x*30);
+	sprite.setPosition(x*50 - y*50, y*30 + x*30);
 	switch(h) {
 		case 1:
 			sprite.setTextureRect(sf::IntRect(0, 0, 144, 144));	

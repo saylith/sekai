@@ -11,7 +11,7 @@
 
 
 Battle::Battle() {
-	bm = BattleMap(25, 10);
+	bm = BattleMap(4, 10);
 	currentAction = UNIT_SELECTION;
 	turn = 0;
 	

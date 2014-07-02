@@ -19,7 +19,7 @@ int main()
     text.setString("test");
     text.setCharacterSize(24);
 
-    sf::View mapView(sf::FloatRect(-200, -400, 1000, 1000));
+    sf::View mapView(sf::FloatRect(-650, -200, 1000, 750));
 
         window.setView(mapView);
         mapView.setViewport(sf::FloatRect(0,0,1,1));
@@ -45,10 +45,9 @@ int main()
         textMenu.setColor(sf::Color::White);
 
         textMap.setString(battle.getMap());
-        textMap.setPosition(-100, -100);
+        textMap.setPosition(-600, -150);
         textMenu.setString(battle.getMenu());
-
-        textMenu.setPosition(350, 0);
+        textMenu.setPosition(-500, -150);
 
         while (window.pollEvent(event))
         {

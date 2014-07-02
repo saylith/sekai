@@ -250,10 +250,16 @@ void BattleMap::cancelUnitMenu() {
 
 std::vector<sf::Sprite> BattleMap::getSprites() {
 	std::vector<sf::Sprite> sprites;
-	for (int y = this->height-1; y >= 0; y--)
+	for (int y = 0; y < this->height; y++)
 		for(int x = 0; x < this->width; x++) {
-			for(sf::Sprite sprite : this->getSquareAt(x, y)->getSprites()) 
+			Square *square = this->getSquareAt(x, y);
+			for(sf::Sprite sprite : square->getSprites()) {
+				
+				if(square == this->focus) 
+					sprite.setColor(sf::Color(255,0,0,255));
+				
 				sprites.push_back(sprite);
+			}
 		}
 		        
 	return sprites;
