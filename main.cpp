@@ -40,6 +40,11 @@ int main()
 
         textMenu.setPosition(350, 0);
 
+        sf::View spriteMap(sf::FloatRect(500, 500, 1000, 1000));
+
+        window.setView(spriteMap);
+        spriteMap.setViewport(sf::FloatRect(0,0,1,1));
+
         sf::Image image;
         image.loadFromFile("map/terrain_sprites/grass.png");
         image.createMaskFromColor(sf::Color(0,255,0,255));
@@ -53,7 +58,7 @@ int main()
 
         sf::Sprite sprite1;
         sprite1.setTexture(texture1);
-        sprite1.setPosition(50, 71);
+        sprite1.setPosition(50, 63);
         //sprite.setColor(sf::Color(0,255,0));
 
         sf::Sprite sprite2;
@@ -86,6 +91,7 @@ int main()
         window.draw(textMenu);
 
         //window.draw(sprite);
+        sf::View currentView = window.getView();
         window.display();
     }
 
