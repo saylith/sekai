@@ -8,12 +8,12 @@
  */
 #include "terrain.h"
 
-Terrain::Terrain() {
+/*Terrain::Terrain() {
 	int z = 0;
 	IsStair isStair = 0;
 	double cost = 1.0;
 	char representation = '.';
-}
+}*/
 
 Terrain::Terrain(int z, double cost, IsStair isStair, char representation) {
 	this->z = z;

@@ -20,11 +20,11 @@ private:
 public:
 
 	//constructors
-	Terrain();
+	//Terrain();
 
 	Terrain(int z = 0,
 			double cost = 1.0,
-			IsStair isStair = 0,
+			IsStair isStair = NONE,
 			char representation = '.');
 
 	//accessor methods
