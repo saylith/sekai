@@ -55,6 +55,18 @@ std::string Battle::getMenu() {
 	return ss.str();
 }
 
+std::vector<sf::Sprite> Battle::drawMap() {
+	std::vector<sf::Sprite> sprites;
+	sprites.push_back(this->bm.getSquareAt(0,0)->getTerrain().getSprite(0,1,1));
+	sprites.push_back(this->bm.getSquareAt(0,0)->getTerrain().getSprite(-1,0,1));
+	sprites.push_back(this->bm.getSquareAt(0,0)->getTerrain().getSprite(0,0,1));
+	sprites.push_back(this->bm.getSquareAt(0,0)->getTerrain().getSprite(0,0,0));
+	sprites.push_back(this->bm.getSquareAt(0,0)->getTerrain().getSprite(1,0,1));
+	sprites.push_back(this->bm.getSquareAt(0,0)->getTerrain().getSprite(1,0,0));
+	sprites.push_back(this->bm.getSquareAt(0,0)->getTerrain().getSprite(0,-1,1));
+	return sprites;
+}
+
 void Battle::keyboardRight() {
 	switch(currentAction){
 		case UNIT_SELECTION:

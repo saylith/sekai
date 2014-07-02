@@ -77,3 +77,11 @@ char Square::getRepresentation() {
 Square::State Square::getState() {
 	return this->state;
 }
+
+Terrain Square::getTerrain() {
+	return this->terrain;
+}
+
+Terrain Square::setTerrain(Terrain terrain) {
+	return this->terrain = terrain;
+}

@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "map/battlemap.h"
 #include "battle/battle.h"
+#include <iostream>
 
 void handleKeyboardEvent();
 
@@ -9,7 +10,9 @@ Battle battle;
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(800, 600), "My window");
+    int windowWidth = 800;
+    int windowHeight = 600;
+    sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "My window");
 
     sf::Text text;
     text.setString("test");
@@ -40,31 +43,11 @@ int main()
 
         textMenu.setPosition(350, 0);
 
-        sf::View spriteMap(sf::FloatRect(500, 500, 1000, 1000));
+        sf::View mapView(sf::FloatRect(-200, 
+            -200, 1000, 1000));
 
-        window.setView(spriteMap);
-        spriteMap.setViewport(sf::FloatRect(0,0,1,1));
-
-        sf::Image image;
-        image.loadFromFile("map/terrain_sprites/grass.png");
-        image.createMaskFromColor(sf::Color(0,255,0,255));
-
-        sf::Texture texture1;
-        texture1.loadFromImage(image, sf::IntRect(0,0,144,144));
-        texture1.setSmooth(false);
-
-        sf::Texture texture2;
-        texture2.loadFromImage(image, sf::IntRect(288,0,144,144));
-
-        sf::Sprite sprite1;
-        sprite1.setTexture(texture1);
-        sprite1.setPosition(50, 63);
-        //sprite.setColor(sf::Color(0,255,0));
-
-        sf::Sprite sprite2;
-        sprite2.setTexture(texture2);
-        sprite2.setPosition(50, 50);
-        //sprite.setColor(sf::Color(0,255,0));
+        window.setView(mapView);
+        mapView.setViewport(sf::FloatRect(0,0,1,1));
 
         while (window.pollEvent(event))
         {
@@ -80,20 +63,22 @@ int main()
             }
         }
         window.clear();
-        window.draw(textMap);
-        window.draw(sprite1);
-        window.draw(sprite2);
+      //  window.draw(textMap);
+      //  window.draw(textMenu);
 
-        sprite1.move(sf::Vector2f(50,32));
-        sprite2.move(sf::Vector2f(50,32));
-        window.draw(sprite1);
-        window.draw(sprite2);
-        window.draw(textMenu);
+        std::vector<sf::Sprite> spriteMap = battle.drawMap();
 
-        //window.draw(sprite);
-        sf::View currentView = window.getView();
+        for(sf::Sprite sprite : spriteMap) {
+            window.draw(sprite);
+        }
         window.display();
     }
+
+    return 0;
+}
+
+int test () {
+    std::vector<sf::Sprite> spriteMap = battle.drawMap();
 
     return 0;
 }

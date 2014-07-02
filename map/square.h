@@ -26,7 +26,7 @@ public:
 
 	Square();
 
-	Square(int x = 0, int y = 0,
+	Square(int x, int y,
 		Terrain terrain = Terrain(), 
 		Landmark landmark = Landmark(),
 		Unit *occupant = 0);
@@ -55,6 +55,9 @@ public:
 	bool isOccupied();
 
 	char getRepresentation();
+
+	Terrain getTerrain();
+	Terrain setTerrain(Terrain terrain);
 };
 
 #endif
