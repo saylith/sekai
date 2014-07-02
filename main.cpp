@@ -4,7 +4,7 @@
 #include "battle/battle.h"
 #include <iostream>
 
-void handleKeyboardEvent();
+sf::View handleKeyboardEvent(sf::View mapView);
 
 Battle battle;
 
@@ -17,6 +17,11 @@ int main()
     sf::Text text;
     text.setString("test");
     text.setCharacterSize(24);
+
+    sf::View mapView(sf::FloatRect(-200, -400, 1000, 1000));
+
+        window.setView(mapView);
+        mapView.setViewport(sf::FloatRect(0,0,1,1));
 
     //run the program as long as the window is open
     while (window.isOpen())
@@ -44,12 +49,6 @@ int main()
 
         textMenu.setPosition(350, 0);
 
-        sf::View mapView(sf::FloatRect(-200, 
-            -400, 1000, 1000));
-
-        window.setView(mapView);
-        mapView.setViewport(sf::FloatRect(0,0,1,1));
-
         while (window.pollEvent(event))
         {
             switch (event.type) {
@@ -57,12 +56,14 @@ int main()
                     window.close();
                     break;
                 case sf::Event::KeyPressed:
-                    handleKeyboardEvent();
+                    window.setView(handleKeyboardEvent(window.getView()));
                     break;
                 default:
                     break;
             }
+            
         }
+
         window.clear();
         window.draw(textMap);
         window.draw(textMenu);
@@ -71,24 +72,29 @@ int main()
         for(sf::Sprite sprite : spriteMap) {
             window.draw(sprite);
         }
+
         window.display();
     }
 
     return 0;
 }
 
-void handleKeyboardEvent() {
+sf::View handleKeyboardEvent(sf::View mapView) {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-        battle.keyboardRight();
+        //battle.keyboardRight();
+        mapView.move(25,0);
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-        battle.keyboardUp();
+        //battle.keyboardUp();
+        mapView.move(0,-25);
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-        battle.keyboardLeft();
+        //battle.keyboardLeft();
+        mapView.move(-25,0);
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-        battle.keyboardDown();
+        //battle.keyboardDown();
+        mapView.move(0,25);
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z)) {
         battle.keyboardZ();
@@ -96,4 +102,5 @@ void handleKeyboardEvent() {
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::X)) {
         battle.keyboardX();
     }
+    return mapView;
 }
