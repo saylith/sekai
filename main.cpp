@@ -12,7 +12,8 @@ int main()
 {
     int windowWidth = 800;
     int windowHeight = 600;
-    sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "My window");
+    sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "sekai");
+    window.setVerticalSyncEnabled(true);
 
     sf::Text text;
     text.setString("test");
@@ -55,14 +56,12 @@ int main()
                 case sf::Event::Closed:
                     window.close();
                     break;
-                case sf::Event::KeyPressed:
-                    window.setView(handleKeyboardEvent(window.getView()));
-                    break;
                 default:
                     break;
             }
             
         }
+        window.setView(handleKeyboardEvent(window.getView()));
 
         window.clear();
         window.draw(textMap);
@@ -82,19 +81,19 @@ int main()
 sf::View handleKeyboardEvent(sf::View mapView) {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
         //battle.keyboardRight();
-        mapView.move(25,0);
+        mapView.move(1,0);
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
         //battle.keyboardUp();
-        mapView.move(0,-25);
+        mapView.move(0,-1);
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
         //battle.keyboardLeft();
-        mapView.move(-25,0);
+        mapView.move(-1,0);
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
         //battle.keyboardDown();
-        mapView.move(0,25);
+        mapView.move(0,1);
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z)) {
         battle.keyboardZ();
