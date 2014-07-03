@@ -81,6 +81,9 @@ class Unit
         bool isAce();
         bool setAce(bool ace);
 
+        sf::Texture texture();
+        sf::Sprite getSprite();
+
     private:
         Stats stats;
         Weapon weapon;
@@ -89,6 +92,7 @@ class Unit
         Gender gender;
         Status status;
         bool ace;
+        sf::Sprite sprite;
         // Terrain::TerrainBonuses terrainBonus;
 
     protected:

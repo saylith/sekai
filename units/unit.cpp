@@ -157,3 +157,8 @@ char Unit::getRepresentation()
 {
     return representation;
 }
+
+sf::Sprite Unit::getSprite()
+{
+    return this->sprite;
+}

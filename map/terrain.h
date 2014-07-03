@@ -24,7 +24,7 @@ public:
 	Terrain();
 	Terrain(TerrainType tt);
 	static std::map<TerrainType, sf::Texture*> textureStore;
-	static sf::Sprite getSprite(int x, int y, int h, TerrainType tt);
+	sf::Sprite getSprite(int h);
 
 private:
 	TerrainType terrainType;

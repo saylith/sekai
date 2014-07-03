@@ -89,28 +89,32 @@ Terrain Square::setTerrain(Terrain terrain) {
 std::vector<sf::Sprite> Square::getSprites() {
 	std::vector<sf::Sprite> sprites;
 
-	sf::Sprite block = Terrain::getSprite(
-		this->coords.x, this->coords.y, 1, Terrain::GRASS);
+	sf::Sprite top = this->terrain.getSprite(0);
+	sf::Sprite block = this->terrain.getSprite(1);
 
-	sf::Sprite top = Terrain::getSprite(
-		this->coords.x, this->coords.y, 0, Terrain::GRASS);
+	int x = this->coords.x;
+	int y = this->coords.y;
+	int pixelX = x*50 - y*50;
+	int pixelY = y*30 + x*30;
+	top.setPosition(pixelX, pixelY - 10);
+	block.setPosition(pixelX, pixelY);
 
+	sf::Color color(255,255,255);
 	switch(this->state) {
 		case SELECTED:
-			block.setColor(sf::Color(51, 102, 153));
-			top.setColor(sf::Color(51, 102, 153));
+			color = sf::Color(51, 102, 153);
 			break;
 		case HIGHLIGHTED:
-			block.setColor(sf::Color(51, 102, 153));
-			top.setColor(sf::Color(51, 102, 153));
+			color = sf::Color(51, 102, 153);
 			break;
 		case PATH:
-			block.setColor(sf::Color(146,205,0));
-			top.setColor(sf::Color(146,205,0));
+			color = sf::Color(146, 205, 0);
 			break;
 		default:
 			break;
 	}
+	block.setColor(color);
+	top.setColor(color);
 
 	sprites.push_back(block);
 	sprites.push_back(top);

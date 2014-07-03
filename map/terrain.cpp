@@ -10,9 +10,10 @@ Terrain::Terrain(TerrainType tt) {
 	terrainType = tt;
 }
 
-sf::Sprite Terrain::getSprite(int x, int y, int h, TerrainType tt) {
+sf::Sprite Terrain::getSprite(int h) {
 	sf::Texture *texture;
-
+	Terrain::TerrainType tt = this->terrainType;
+	// Load texture if not already cached
 	if( Terrain::textureStore.count(tt) <= 0 ) {
 		std::string filename = "map/terrain_sprites/generic.png";
 
@@ -36,10 +37,8 @@ sf::Sprite Terrain::getSprite(int x, int y, int h, TerrainType tt) {
 	}
 
 
-	
 	sf::Sprite sprite;
 	sprite.setTexture(*texture);
-	sprite.setPosition(x*50 - y*50, y*30 + x*30);
 	switch(h) {
 		case 1:
 			sprite.setTextureRect(sf::IntRect(0, 0, 144, 144));	
@@ -49,7 +48,6 @@ sf::Sprite Terrain::getSprite(int x, int y, int h, TerrainType tt) {
 			break;
 		default:
 			sprite.setTextureRect(sf::IntRect(288, 0, 144, 144));	
-			sprite.move(sf::Vector2f(0, -10));
 			break;
 	}
 	
