@@ -76,8 +76,8 @@ std::vector<sf::Sprite> Square::getSprites() {
 	// //twoBlock.setTexture(*texture);
 
 	top.setTextureRect(sf::IntRect(288, 0, 144, 144));	
-	oneBlock.setTextureRect(sf::IntRect(144, 0, 144, 144));	
-	twoBlock.setTextureRect(sf::IntRect(288, 0, 144, 144));	
+	oneBlock.setTextureRect(sf::IntRect(0, 0, 144, 144));	
+	twoBlock.setTextureRect(sf::IntRect(144, 0, 144, 144));	
 
 	std::vector<sf::Sprite> sprites;
 	
@@ -91,7 +91,7 @@ std::vector<sf::Sprite> Square::getSprites() {
 		oneBlock.move(0, -10 * (this->height - 1));
 		sprites.push_back(oneBlock);
 	}
-	top.move(0, -10 * (this->height));
+	top.move(0, -10 - 10 * (this->height));
 	sprites.push_back(top);
 	return sprites;
 }

@@ -32,7 +32,7 @@ public:
 		Unit *occupant = 0,
 		Terrain terrain = NONE, 
 		Landmark landmark = EMPTY,
-		int height = 0
+		int height = 1
 	);
 
 	Unit *getUnit();
