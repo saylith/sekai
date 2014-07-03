@@ -1,8 +1,6 @@
 #ifndef UNIT_H
 #define UNIT_H
 
-#include "../map/terrain.h"
-
 class Unit
 {
     public:
@@ -75,14 +73,14 @@ class Unit
         Status getStatus();
         Status setStatus(Status status);
 
-        int getAttackDamage(Unit enemy, Terrain terrain);
+     //   int getAttackDamage(Unit enemy, Square::Terrain terrain);
         int getMovement();
         char getRepresentation();
+        // sf::Sprite getSprite();
+
         bool isAce();
         bool setAce(bool ace);
 
-        sf::Texture texture();
-        sf::Sprite getSprite();
 
     private:
         Stats stats;
@@ -92,8 +90,8 @@ class Unit
         Gender gender;
         Status status;
         bool ace;
-        sf::Sprite sprite;
-        // Terrain::TerrainBonuses terrainBonus;
+      //  sf::Sprite sprite;
+        //std::map<Square::Terrain, float> terrainBonus;
 
     protected:
         char representation;

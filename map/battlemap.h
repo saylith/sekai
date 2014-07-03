@@ -6,18 +6,14 @@
 
 class BattleMap
 {
-	int width;
-	int height;
-	std::vector<Square *> squares;
-	std::vector<Square *> possibleMoves;
-	std::vector<Square *> path;
-	Square* focus;
-
-
 public:
 	enum Direction {
 		NORTH, SOUTH, EAST, WEST
 	};
+
+	struct Coords {
+		int x, y;	
+	} coords;
 
 	BattleMap();
 
@@ -30,21 +26,21 @@ public:
 	int setHeight(int height);
 
 	Square *getSquareAt(int x, int y);
-	Square *getSquareAt(Square::Coords coords);
+	Square *getSquareAt(Coords coords);
 
 	std::string printMap();
 
-	Square *setFocus(int x, int y);
-	Square *setFocus(Square::Coords coords);
-	Square *getFocus();
-	Square *moveFocus(Direction direction);
-	Square *moveUnit(Square::Coords source, Square::Coords dest);
-	Square *movePath(Direction);
+	Coords setFocus(int x, int y);
+	Coords setFocus(Coords coords);
+	Coords getFocus();
+	Coords moveFocus(Direction direction);
+	Coords moveUnit(Coords source, Coords dest);
+	Coords movePath(Direction);
 
-	void calculatePossibleMoves(Square *selection);
+	void calculatePossibleMoves(Coords selection);
 
-	Square *confirm();
-	Square *cancel();
+	Coords confirm();
+	Coords cancel();
 
 	void confirmUnitSelection();
 
@@ -61,9 +57,17 @@ public:
 	std::vector<sf::Sprite> getSprites();
 
 private:
-	Square::Coords getValidCoordsInDirection(Square::Coords coords, 
+	int width;
+	int height;
+	std::vector<Square *> squares;
+	std::vector<Coords> possibleMoves;
+	std::vector<Coords> path;
+	std::map<Coords, sf::Color> highlighted;
+	Coords focus;
+
+	Coords getValidCoordsInDirection(Coords coords, 
 		Direction direction, Unit *myUnit = NULL);
-	void calculatePossibleMoves(Square *selection, Unit *myUnit, int remaining);
+	void calculatePossibleMoves(Coords selection, Unit *myUnit, int remaining);
 	void clearPossibleMoves();
 	void clearPath();
 };

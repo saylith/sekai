@@ -17,6 +17,6 @@ Saylith::Saylith() {
 	this->representation = 's';
 }
 
-int Saylith::getAttackDamage(Unit enemy, Terrain terrain) {
-	return 0;
-}
+// int Saylith::getAttackDamage(Unit enemy, Terrain terrain) {
+// 	return 0;
+// }

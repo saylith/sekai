@@ -3,6 +3,7 @@
  */
 
 #include "unit.h"
+#include <SFML/Graphics.hpp>
 
 Unit::Stats Unit::getStats() {
     return this->stats;
@@ -144,10 +145,10 @@ bool Unit::setAce(bool ace) {
     return this->ace = ace;
 }
 
-int Unit::getAttackDamage(Unit enemy, Terrain terrain)
-{
-    return 0;
-}
+// int Unit::getAttackDamage(Unit enemy, Terrain terrain)
+// {
+//     return 0;
+// }
 
 int Unit::getMovement()
 {
@@ -156,9 +157,4 @@ int Unit::getMovement()
 char Unit::getRepresentation()
 {
     return representation;
-}
-
-sf::Sprite Unit::getSprite()
-{
-    return this->sprite;
 }
