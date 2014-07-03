@@ -100,7 +100,7 @@ std::vector<sf::Sprite> Square::getSprites() {
 	for(int i = 0; i < this->height-1; i+=2) {
 		sf::Sprite copyBlock = twoBlock;
 		copyBlock.move(0, -20*i);
-		copyBlock.setColor(sf::Color(139, 139, 139));
+		//copyBlock.setColor(sf::Color(139, 139, 139)); //uncomment to make more visible
 		sprites.push_back(copyBlock);
 	}
 

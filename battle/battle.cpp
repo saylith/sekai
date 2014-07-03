@@ -129,14 +129,15 @@ void Battle::keyboardZ() {
 	switch(currentAction) {
 		case UNIT_SELECTION: {
 			
-			// if (bm.getSquareAt(bm.confirm())->isOccupied()) {
-			// 	currentAction = UNIT_SELECTED;
-			// 	menu = blankMenu;
-			// }
-			// else {
+			if (bm.getSquareAt(bm.getFocus())->isOccupied()) {
+				currentAction = UNIT_SELECTED;
+				menu = blankMenu;
+				bm.updateStateOnSelection();
+			}
+			else {
 				currentAction = MAIN_MENU;
 				menu = mainMenu;
-			// }
+			}
 			break;
 		}
 		case UNIT_SELECTED:
@@ -162,6 +163,7 @@ switch(currentAction){
 		case UNIT_SELECTED:
 			currentAction = UNIT_SELECTION;
 			menu = blankMenu;
+			bm.clearState();
 			break;
 		case UNIT_MENU:
 			currentAction = UNIT_SELECTED;

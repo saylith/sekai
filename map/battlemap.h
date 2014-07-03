@@ -49,7 +49,8 @@ public:
 	std::string printMap();
 	std::vector<sf::Sprite> getSprites();
 
-	void updateStateOnSelection(Coords selection);
+	void updateStateOnSelection();
+	void clearState();
 
 private:
 	int width;
@@ -62,14 +63,10 @@ private:
 	
 	Coords getValidCoordsInDirection(Coords coords, 
 		Direction direction, Unit *myUnit = NULL);
-	void calculateAccessibleSquares(Coords selection, Unit *myUnit, int remaining);
-	void calculateReachableSquares(std::vector<Coords> reachable);
+	void setRadiusState(Coords selection, int radius, State state);
 	void calculateShortestPath();
 
-	void clearReachable();
-	void clearAccessible();
-	void clearPaths();
-	void clearState();
+	
 };
 
 #endif
