@@ -88,9 +88,31 @@ Terrain Square::setTerrain(Terrain terrain) {
 
 std::vector<sf::Sprite> Square::getSprites() {
 	std::vector<sf::Sprite> sprites;
-	sprites.push_back(Terrain::getSprite(
-		this->coords.x, this->coords.y, 1, Terrain::GRASS));
-	sprites.push_back(Terrain::getSprite(
-		this->coords.x, this->coords.y, 0, Terrain::GRASS));
+
+	sf::Sprite block = Terrain::getSprite(
+		this->coords.x, this->coords.y, 1, Terrain::GRASS);
+
+	sf::Sprite top = Terrain::getSprite(
+		this->coords.x, this->coords.y, 0, Terrain::GRASS);
+
+	switch(this->state) {
+		case SELECTED:
+			block.setColor(sf::Color(51, 102, 153));
+			top.setColor(sf::Color(51, 102, 153));
+			break;
+		case HIGHLIGHTED:
+			block.setColor(sf::Color(51, 102, 153));
+			top.setColor(sf::Color(51, 102, 153));
+			break;
+		case PATH:
+			block.setColor(sf::Color(146,205,0));
+			top.setColor(sf::Color(146,205,0));
+			break;
+		default:
+			break;
+	}
+
+	sprites.push_back(block);
+	sprites.push_back(top);
 	return sprites;
 }

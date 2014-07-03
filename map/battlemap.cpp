@@ -107,8 +107,8 @@ Square *BattleMap::movePath(Direction direction) {
 
 	Square::State state = this->getSquareAt(dest)->getState();
 
-	if(state == Square::HIGHLIGHTED || state == Square::PATH) {
-
+	if(state == Square::HIGHLIGHTED || state == Square::PATH || state == Square::SELECTED) {
+		this->focus->setState(Square::PATH);
 		moveFocus(direction);
 
 		this->focus->setState(Square::PATH);
@@ -256,7 +256,7 @@ std::vector<sf::Sprite> BattleMap::getSprites() {
 			for(sf::Sprite sprite : square->getSprites()) {
 				
 				if(square == this->focus) 
-					sprite.setColor(sf::Color(255,0,0,255));
+					sprite.setColor(sf::Color(255,153,0));
 				
 				sprites.push_back(sprite);
 			}

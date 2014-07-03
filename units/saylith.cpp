@@ -7,8 +7,7 @@
 #include "saylith.h"
 
 Saylith::Saylith() {
-	this->setStats(2000, 10, 11, 12, 13, 4);
-	//this->setMOV(4); // this is redundant and should be removed. Movement is set in the "setstats" method
+	this->setStats(2000, 10, 11, 12, 13, 3);
 	this->setWeapon(Unit::SWORD);
 	this->setArmor(Unit::LIGHT);
 	this->setType(Unit::FOOT);
