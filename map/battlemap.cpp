@@ -30,6 +30,15 @@ BattleMap::BattleMap(int width, int height){
 	focus.y = 0;
 	squares.at(10)->setUnit(new Saylith());
 	squares.at(36)->setUnit(new Saylith());
+
+	squares.at(0)->setHeight(7);
+	squares.at(1)->setHeight(6);
+	squares.at(2)->setHeight(5);
+	squares.at(3)->setHeight(4);
+	squares.at(36)->setHeight(3);
+	squares.at(37)->setHeight(2);
+	squares.at(38)->setHeight(1);
+	squares.at(39)->setHeight(0);
 }
 
 int BattleMap::getWidth() {

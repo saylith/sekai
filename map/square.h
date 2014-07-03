@@ -32,7 +32,7 @@ public:
 		Unit *occupant = 0,
 		Terrain terrain = NONE, 
 		Landmark landmark = EMPTY,
-		int height = 1
+		int height = 3
 	);
 
 	Unit *getUnit();
@@ -41,6 +41,12 @@ public:
 
 	Terrain getTerrain();
 	Terrain setTerrain(Terrain terrain);
+	
+	Landmark getLandmark();
+	Landmark setLandmark(Landmark landmark);
+
+	int getHeight();
+	int setHeight(int height);
 
 	char getRepresentation();
 	std::vector<sf::Sprite> getSprites();

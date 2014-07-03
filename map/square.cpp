@@ -35,6 +35,22 @@ Square::Terrain Square::setTerrain(Terrain terrain) {
 	return this->terrain = terrain;
 }
 
+Square::Landmark Square::getLandmark() {
+	return this->landmark;
+}
+
+Square::Landmark Square::setLandmark(Landmark landmark) {
+	return this->landmark = landmark;
+}
+
+int Square::getHeight() {
+	return this->height;
+}
+
+int Square::setHeight(int height) {
+	return this->height = height;
+}
+
 char Square::getRepresentation() {
 	if(this->getUnit() != 0)
 		return this->getUnit()->getRepresentation();
@@ -71,9 +87,9 @@ std::vector<sf::Sprite> Square::getSprites() {
 	sf::Sprite oneBlock;
 	sf::Sprite twoBlock;
 
-	 top.setTexture(*texture, true);
+	top.setTexture(*texture, true);
 	oneBlock.setTexture(*texture);
-	// //twoBlock.setTexture(*texture);
+	twoBlock.setTexture(*texture);
 
 	top.setTextureRect(sf::IntRect(288, 0, 144, 144));	
 	oneBlock.setTextureRect(sf::IntRect(0, 0, 144, 144));	
@@ -81,17 +97,18 @@ std::vector<sf::Sprite> Square::getSprites() {
 
 	std::vector<sf::Sprite> sprites;
 	
-	for(int i = 0; i < this->height-2; i+=2) {
+	for(int i = 0; i < this->height-1; i+=2) {
 		sf::Sprite copyBlock = twoBlock;
-		copyBlock.move(0, -10*i);
+		copyBlock.move(0, -20*i);
+		copyBlock.setColor(sf::Color(139, 139, 139));
 		sprites.push_back(copyBlock);
 	}
 
 	if(this->height % 2 == 1) {
-		oneBlock.move(0, -10 * (this->height - 1));
+		oneBlock.move(0, -20 * (this->height - 1));
 		sprites.push_back(oneBlock);
 	}
-	top.move(0, -10 - 10 * (this->height));
+	top.move(0, -20 * (this->height));
 	sprites.push_back(top);
 	return sprites;
 }
