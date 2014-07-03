@@ -10,16 +10,16 @@
 #include <sstream>
 #include <iostream>
 
-BattleMap::BattleMap(){
-	width = 0;
-	height = 0;
+BattleMap::BattleMap(int width, int height){ 
+	this->width = width;
+	this->height = height;
 	focus.x = 0;
 	focus.y = 0;
 }
 
-BattleMap::BattleMap(int width, int height){
-	this->width = width;
-	this->height = height;
+BattleMap::BattleMap(bool testing) {
+	this->width = 4;
+	this->height = 10;
 	for(int x = 0; x < width; x++) {
 		for(int y = 0; y < height; y++) {
 			Square *square = new Square();
@@ -63,25 +63,24 @@ Square* BattleMap::getSquareAt(BattleMap::Coords coords) {
 	return this->getSquareAt(coords.x, coords.y);
 }
 
-BattleMap::Coords BattleMap::getFocus() {
-	return this->focus;
+BattleMap::State BattleMap::getStateAt(int x, int y) {
+	return state.at(x*height + y);
 }
 
-std::string BattleMap::printMap() {
-	std::stringstream ss;
-	std::string map;
+BattleMap::State BattleMap::getStateAt(BattleMap::Coords coords) {
+	return this->getStateAt(coords.x, coords.y);
+}
 
-	for(int y = 0; y < height; y++) {
-		for(int x = 0; x < width; x++) {
-			if(this->focus.x == x && this->focus.y == y)
-				ss << "f";
-			else
-				ss << this->getSquareAt(x, y)->getRepresentation();
-//            ss << "(" << x << "," << y << ") ";
-		}
-        ss << std::endl;
-	}
-	return ss.str();
+BattleMap::State BattleMap::setStateAt(BattleMap::State state, int x, int y) {
+	return this->state.at(x*height + y) = state;
+}
+
+BattleMap::State BattleMap::setStateAt(BattleMap::State state, BattleMap::Coords coords) {
+	return this->setStateAt(state, coords.x, coords.y);
+}
+
+BattleMap::Coords BattleMap::getFocus() {
+	return this->focus;
 }
 
 BattleMap::Coords BattleMap::setFocus(int x, int y) {
@@ -101,29 +100,53 @@ BattleMap::Coords BattleMap::moveFocus(Direction direction) {
 	BattleMap::Coords newCoords = 
 		this->getValidCoordsInDirection(oldCoords, direction);
 	return this->setFocus(newCoords);
-	
 }
 
 BattleMap::Coords BattleMap::moveUnit(BattleMap::Coords source, BattleMap::Coords dest) {
-	Unit *unit = getSquareAt(source)->getUnit();
-	getSquareAt(source)->setUnit(NULL);
-	getSquareAt(dest)->setUnit(unit);
-	return dest;
+	if(getSquareAt(source)->getUnit() == NULL) {
+		Unit *unit = getSquareAt(source)->getUnit();
+		getSquareAt(source)->setUnit(NULL);
+		getSquareAt(dest)->setUnit(unit);
+		return dest;
+	}
+	return source;
 }
 
-BattleMap::Coords BattleMap::movePath(Direction direction) {
+std::string BattleMap::printMap() {
+	std::stringstream ss;
+	std::string map;
 
-	BattleMap::Coords dest = getValidCoordsInDirection(this->focus,
-	 direction, getSquareAt(this->focus)->getUnit());
+	for(int y = 0; y < height; y++) {
+		for(int x = 0; x < width; x++) {
+			if(this->focus.x == x && this->focus.y == y)
+				ss << "f";
+			
+			else
+				ss << this->getSquareAt(x, y)->getRepresentation();
+		}
+        ss << std::endl;
+	}
+	return ss.str();
+}
 
-	// if(highlighted.count(this->focus)
-	// 	+ this->path.count(this->focus) > 0) {
+std::vector<sf::Sprite> BattleMap::getSprites() {
+	std::vector<sf::Sprite> sprites;
+	for (int y = 0; y < this->height; y++)
+		for(int x = 0; x < this->width; x++) {
+			Square *square = this->getSquareAt(x, y);
+			for(sf::Sprite sprite : square->getSprites()) {
+					int pixelX = x*50 - y*50;
+					int pixelY = y*30 + x*30;
+					sprite.move(pixelX, pixelY);
+	// block.setPosition(pixelX, pixelY);
+				if(this->focus.x == x && this->focus.y == y) 
+					sprite.setColor(sf::Color(255,153,0));
+				
+				sprites.push_back(sprite);
+			}
+		}
 
-	// 	moveFocus(direction);
-
-	// 	this->path.push_back(this->focus);
-	// }
-	return this->focus;
+	return sprites;
 }
 
 BattleMap::Coords BattleMap::getValidCoordsInDirection(
@@ -155,113 +178,61 @@ BattleMap::Coords BattleMap::getValidCoordsInDirection(
 	return coords;
 }
 
-void BattleMap::calculatePossibleMoves(Coords selection) {
-	if(!getSquareAt(selection)->isOccupied())
-		return;
+void BattleMap::updateStateOnSelection(Coords selection) {
+	// if(!getSquareAt(selection)->isOccupied()) 
+	// 	return;
 
-	int remaining = getSquareAt(selection)->getUnit()->getMovement();
-	possibleMoves = std::vector<Coords>();
-	calculatePossibleMoves(selection, getSquareAt(selection)->getUnit(), remaining+1);
+	// int remaining = getSquareAt(selection)->getUnit()->getMovement();
+	// possibleMoves = std::vector<Coords>();
+	// calculatePossibleMoves(selection, getSquareAt(selection)->getUnit(), remaining+1);
 }
 
-void BattleMap::calculatePossibleMoves(Coords selection, Unit *myUnit,
+void BattleMap::calculateAccessibleSquares(Coords selection, Unit *myUnit,
 		int remaining) {
-	if(remaining == 0)
-		return;
-	if(getSquareAt(selection)->isOccupied() && getSquareAt(selection)->getUnit() != myUnit)
-		return;
+	// if(remaining == 0)
+	// 	return;
+	// if(getSquareAt(selection)->isOccupied() && getSquareAt(selection)->getUnit() != myUnit)
+	// 	return;
 
-	possibleMoves.push_back(selection);
+	// possibleMoves.push_back(selection);
 
-	BattleMap::Coords northCoords = getValidCoordsInDirection(
-		selection, BattleMap::NORTH);
-	BattleMap::Coords southCoords = getValidCoordsInDirection(
-		selection, BattleMap::SOUTH);
-	BattleMap::Coords eastCoords = getValidCoordsInDirection(
-		selection, BattleMap::EAST);
-	BattleMap::Coords westCoords = getValidCoordsInDirection(
-		selection, BattleMap::WEST);
+	// BattleMap::Coords northCoords = getValidCoordsInDirection(
+	// 	selection, BattleMap::NORTH);
+	// BattleMap::Coords southCoords = getValidCoordsInDirection(
+	// 	selection, BattleMap::SOUTH);
+	// BattleMap::Coords eastCoords = getValidCoordsInDirection(
+	// 	selection, BattleMap::EAST);
+	// BattleMap::Coords westCoords = getValidCoordsInDirection(
+	// 	selection, BattleMap::WEST);
 
-	calculatePossibleMoves(
-		northCoords, myUnit, remaining -1);
-	calculatePossibleMoves(
-		southCoords, myUnit, remaining -1);
-	calculatePossibleMoves(
-		westCoords, myUnit, remaining -1);
-	calculatePossibleMoves(
-		eastCoords, myUnit, remaining -1);
-
-}
-
-void BattleMap::clearPossibleMoves() {
-	possibleMoves.clear();
-}
-
-
-void BattleMap::clearPath() {
-	path.clear();
-}
-
-BattleMap::Coords BattleMap::confirm() {
-	// if(getSquareAt(this->focus).isOccupied()) {
-	// 	// this->focus.setSelected();
-
-	// }
-	return this->focus;
-}
-
-
-
-BattleMap::Coords BattleMap::cancel() {
-	clearPossibleMoves();
-	clearPath();
-	return this->focus;
-}
-
-void BattleMap::confirmUnitSelection() {
-	// if(this->focus.isOccupied()) {
-	// 	// this->focus.setSelected();
-	// }
-	this->calculatePossibleMoves(this->focus);
-	path.push_back(this->focus);
-}
-
-void BattleMap::confirmUnitDestination() {
-	path.push_back(this->focus);
-}	
-
-void BattleMap::confirmUnitWait() {
-	moveUnit(path.front(), path.back());
-	clearPath();
-	clearPossibleMoves();
-}
-
-void BattleMap::cancelUnitSelection() {
-	this->focus = path.front();
-	clearPath();
-	clearPossibleMoves();
-}
-
-void BattleMap::cancelUnitMenu() {
+	// calculateAccessibleSquares(
+	// 	northCoords, myUnit, remaining -1);
+	// calculateAccessibleSquares(
+	// 	southCoords, myUnit, remaining -1);
+	// calculateAccessibleSquares(
+	// 	westCoords, myUnit, remaining -1);
+	// calculateAccessibleSquares(
+	// 	eastCoords, myUnit, remaining -1);
 
 }
 
-std::vector<sf::Sprite> BattleMap::getSprites() {
-	std::vector<sf::Sprite> sprites;
-	for (int y = 0; y < this->height; y++)
-		for(int x = 0; x < this->width; x++) {
-			Square *square = this->getSquareAt(x, y);
-			for(sf::Sprite sprite : square->getSprites()) {
-					int pixelX = x*50 - y*50;
-					int pixelY = y*30 + x*30;
-					sprite.move(pixelX, pixelY);
-	// block.setPosition(pixelX, pixelY);
-				if(this->focus.x == x && this->focus.y == y) 
-					sprite.setColor(sf::Color(255,153,0));
-				
-				sprites.push_back(sprite);
-			}
-		}
+void BattleMap::calculateReachableSquares(
+	std::vector<BattleMap::Coords> reachable) {
 
-	return sprites;
+}
+
+void BattleMap::clearAccessible() {
+	
+}
+
+void BattleMap::clearReachable() {
+	
+}
+
+void BattleMap::clearPaths() {
+	
+}
+
+void BattleMap::clearState() {
+
 }

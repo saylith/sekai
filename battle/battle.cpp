@@ -11,7 +11,7 @@
 
 
 Battle::Battle() {
-	bm = BattleMap(4, 10);
+	bm = BattleMap(true);
 	currentAction = UNIT_SELECTION;
 	turn = 0;
 	
@@ -65,7 +65,7 @@ void Battle::keyboardRight() {
 			bm.moveFocus(BattleMap::EAST);
 			break;
 		case UNIT_SELECTED:
-			bm.movePath(BattleMap::EAST);
+
 			break;
 		case MAIN_MENU:
 			mainMenuSelectionIndex = 
@@ -82,7 +82,7 @@ switch(currentAction){
 			bm.moveFocus(BattleMap::NORTH);
 			break;
 		case UNIT_SELECTED:
-			bm.movePath(BattleMap::NORTH);
+
 			break;
 		case MAIN_MENU:
 			mainMenuSelectionIndex = 
@@ -98,7 +98,7 @@ switch(currentAction){
 			bm.moveFocus(BattleMap::WEST);
 			break;
 		case UNIT_SELECTED:
-			bm.movePath(BattleMap::WEST);
+
 			break;
 		case MAIN_MENU:
 			mainMenuSelectionIndex = 
@@ -114,7 +114,7 @@ switch(currentAction){
 			bm.moveFocus(BattleMap::SOUTH);
 			break;
 		case UNIT_SELECTED:
-			bm.movePath(BattleMap::SOUTH);
+
 			break;
 		case MAIN_MENU:
 			mainMenuSelectionIndex = 
@@ -129,27 +129,24 @@ void Battle::keyboardZ() {
 	switch(currentAction) {
 		case UNIT_SELECTION: {
 			
-			if (bm.getSquareAt(bm.confirm())->isOccupied()) {
-				currentAction = UNIT_SELECTED;
-				menu = blankMenu;
-				bm.confirmUnitSelection();
-			}
-			else {
+			// if (bm.getSquareAt(bm.confirm())->isOccupied()) {
+			// 	currentAction = UNIT_SELECTED;
+			// 	menu = blankMenu;
+			// }
+			// else {
 				currentAction = MAIN_MENU;
 				menu = mainMenu;
-			}
+			// }
 			break;
 		}
 		case UNIT_SELECTED:
 			currentAction = UNIT_MENU;
 			menu = unitMenu;
-			bm.confirmUnitDestination();
 			break;
 		case UNIT_MENU:
 			if (unitMenuSelectionIndex == 0) {
 				currentAction = UNIT_SELECTION;
 				menu = blankMenu;
-				bm.confirmUnitWait();
 			}
 			break;
 		default:
@@ -165,12 +162,10 @@ switch(currentAction){
 		case UNIT_SELECTED:
 			currentAction = UNIT_SELECTION;
 			menu = blankMenu;
-			bm.cancelUnitSelection();
 			break;
 		case UNIT_MENU:
 			currentAction = UNIT_SELECTED;
 			menu = blankMenu;
-			bm.cancelUnitMenu();
 			break;
 		default:
 			break;
