@@ -30,7 +30,7 @@ private:
 
 public:
 
-	Square();
+	Square();//I suspect this could easily cause issues in the future
 
 	Square(int x = 0, int y = 0,
 		Terrain terrain = Terrain(), 

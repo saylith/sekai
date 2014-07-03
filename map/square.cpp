@@ -5,7 +5,7 @@
 
 #include "square.h"
 
-Square::Square() {
+Square::Square() {//possible issues may arise from this, should we comment out or remove?
 	this->coords.x = 0;
 	this->coords.y = 0;
 	this->state = NONE;
