@@ -65,7 +65,7 @@ void Battle::keyboardRight() {
 			bm.moveFocus(BattleMap::EAST);
 			break;
 		case UNIT_SELECTED:
-
+		
 			break;
 		case MAIN_MENU:
 			mainMenuSelectionIndex = 

@@ -80,7 +80,6 @@ std::vector<sf::Sprite> Square::getSprites() {
 	    Square::textureStore.insert(std::make_pair(this->terrain, tex));
 	}
 	texture = Square::textureStore.at(this->terrain);
-	
 
 	// // Setup sprites
 	sf::Sprite top;

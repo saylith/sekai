@@ -65,7 +65,7 @@ int main()
         }
         
 
-        window.clear();
+        window.clear(sf::Color(51,51,51));
         window.draw(textMap);
         window.draw(textMenu);
 
