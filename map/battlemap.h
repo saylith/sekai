@@ -53,6 +53,7 @@ public:
 	void updateStateOnSelection();
 	void clearState();
 	void setFocusToOrigin();
+	Direction setUnitDirection(Direction direction);
 
 private:
 

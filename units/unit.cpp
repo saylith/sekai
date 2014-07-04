@@ -144,10 +144,10 @@ bool Unit::isAce() {
 bool Unit::setAce(bool ace) {
     return this->ace = ace;
 }
-BattleMap::Direction Unit::getDirection() {
+Unit::Direction Unit::getDirection() {
 	return this->direction;
 }
-BattleMap::Direction Unit::setDirection(BattleMap::Direction direction){
+Unit::Direction Unit::setDirection(Unit::Direction direction){
 	return this->direction = direction;
 }
 

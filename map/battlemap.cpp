@@ -255,3 +255,8 @@ void BattleMap::clearState() {
 void BattleMap::setFocusToOrigin() {
 	focus = path.origin;
 }
+
+void BattleMap::setUnitDirection(BattleMap::Direction direction) {
+	Unit *unit = getSquareAt(focus)->getUnit();
+	unit->setDirection(direction);
+}

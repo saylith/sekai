@@ -35,6 +35,10 @@ class Unit
             WAND, STAFF, TOME
         };
 
+        enum Direction {
+            NORTH, SOUTH, EAST, WEST
+        };
+
         Weapon getWeapon();
         Weapon setWeapon(Weapon weapon);
         bool isMelee();
@@ -80,8 +84,8 @@ class Unit
 
         bool isAce();
         bool setAce(bool ace);
-        BattleMap::Direction getDirection();
-        BattleMap::Direction setDirection(BattleMap::Direction direction);
+        Direction getDirection();
+        Direction setDirection(Direction direction);
 
 
     private:
@@ -91,7 +95,7 @@ class Unit
         Type type;
         Gender gender;
         Status status;
-        BattleMap::Direction direction;
+        Direction direction;
         bool ace;
       //  sf::Sprite sprite;
         //std::map<Square::Terrain, float> terrainBonus;
