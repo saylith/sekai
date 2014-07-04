@@ -8,7 +8,7 @@ class BattleMap
 {
 public:
 	enum Direction {
-		NORTH, SOUTH, EAST, WEST
+		NORTH = 0, SOUTH = 1, EAST = 2, WEST = 3
 	};
 
 	struct Coords {
@@ -53,7 +53,7 @@ public:
 	void updateStateOnSelection();
 	void clearState();
 	void setFocusToOrigin();
-	Direction setUnitDirection(Direction direction);
+	void setUnitDirection(Direction direction);
 
 private:
 

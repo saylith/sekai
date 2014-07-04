@@ -36,7 +36,7 @@ class Unit
         };
 
         enum Direction {
-            NORTH, SOUTH, EAST, WEST
+            NORTH = 0, SOUTH = 1, EAST = 2, WEST = 3
         };
 
         Weapon getWeapon();

@@ -258,5 +258,5 @@ void BattleMap::setFocusToOrigin() {
 
 void BattleMap::setUnitDirection(BattleMap::Direction direction) {
 	Unit *unit = getSquareAt(focus)->getUnit();
-	unit->setDirection(direction);
+	unit->setDirection( (Unit::Direction)(char)direction);
 }
