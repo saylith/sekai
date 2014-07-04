@@ -5,14 +5,14 @@
 
 class Battle
 {
-	enum Action {
+	/*enum Action { // to be made a class
 		UNIT_SELECTION, 
 		UNIT_SELECTED, 
 		UNIT_SPIN,
 		UNIT_MENU, 
 		MAIN_MENU, 
 		BUSY
-	};
+	};*/
 
 	BattleMap bm;
 	
