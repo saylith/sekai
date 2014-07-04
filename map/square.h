@@ -25,7 +25,9 @@ public:
 	static std::map<Terrain, sf::Texture*> textureStore;
 
 	enum Landmark {
-		EMPTY
+		EMPTY = 0,
+		Stair_NW = 1,
+		Stair_NE = 2
 	};
 
 	Square(
