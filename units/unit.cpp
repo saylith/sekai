@@ -143,6 +143,12 @@ bool Unit::isAce() {
 bool Unit::setAce(bool ace) {
     return this->ace = ace;
 }
+BattleMap::Direction Unit::getDirection() {
+	return this->direction;
+}
+BattleMap::Direction Unit::setDirection(BattleMap::Direction direction){
+	return this->direction = direction;
+}
 
 int Unit::getAttackDamage(Unit enemy, Terrain terrain)
 {

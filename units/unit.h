@@ -2,7 +2,7 @@
 #define UNIT_H
 
 #include "../map/terrain.h"
-
+#include "../map/battlemap.h"
 class Unit
 {
     public:
@@ -80,6 +80,8 @@ class Unit
         char getRepresentation();
         bool isAce();
         bool setAce(bool ace);
+        BattleMap::Direction getDirection();
+        BattleMap::Direction setDirection(BattleMap::Direction direction);
 
     private:
         Stats stats;
@@ -88,6 +90,7 @@ class Unit
         Type type;
         Gender gender;
         Status status;
+        BattleMap::Direction direction;
         bool ace;
         // Terrain::TerrainBonuses terrainBonus;
 
