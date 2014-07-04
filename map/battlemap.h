@@ -2,28 +2,28 @@
 #define BATTLEMAP_H
 
 #include "square.h"
-#include <string>
-#include <vector>
-
+#include <forward_list>
 
 class BattleMap
 {
-	int width;
-	int height;
-	std::vector<Square *> squares;
-	std::vector<Square *> possibleMoves;
-	std::vector<Square *> path;
-	Square* focus;
-
-
 public:
 	enum Direction {
 		NORTH, SOUTH, EAST, WEST
 	};
 
-	BattleMap();
+	struct Coords {
+		int x, y;	
+	};
 
-	BattleMap(int width, int height);
+	enum State {
+		NONE = '.', // Not accessible or reachable.
+		ACCESSIBLE = 'a', // Within movement range.
+		REACHABLE = 'r', // Within attack range.
+		PATH = 'p' // Part of the path. Also within movement/attack range
+	};
+
+	BattleMap(int width = 0, int height = 0);
+	BattleMap(bool testing);
 
 	int getWidth();
 	int getHeight();
@@ -32,40 +32,51 @@ public:
 	int setHeight(int height);
 
 	Square *getSquareAt(int x, int y);
-	Square *getSquareAt(Square::Coords coords);
+	Square *getSquareAt(Coords coords);
+
+	State getStateAt(int x, int y);
+	State getStateAt(Coords coords);
+	State setStateAt(int x, int y, State state);
+	State setStateAt(Coords coords, State state);
+
+	Coords getFocus();
+	Coords setFocus(int x, int y);
+	Coords setFocus(Coords coords);
+	Coords moveFocus(Direction direction);
+	Coords movePath(Direction direction);
+
+	Coords moveUnit();
 
 	std::string printMap();
+	std::vector<sf::Sprite> getSprites();
 
-	Square *setFocus(int x, int y);
-	Square *setFocus(Square::Coords coords);
-	Square *getFocus();
-	Square *moveFocus(Direction direction);
-	Square *moveUnit(Square::Coords source, Square::Coords dest);
-	Square *movePath(Direction);
-
-	void calculatePossibleMoves(Square *selection);
-
-	Square *confirm();
-	Square *cancel();
-
-	void confirmUnitSelection();
-
-	void confirmUnitDestination();
-
-	void confirmUnitWait();
-
-	void cancelMainMenu();
-
-	void cancelUnitSelection();
-
-	void cancelUnitMenu();
+	void updateStateOnSelection();
+	void clearState();
+	void setFocusToOrigin();
 
 private:
-	Square::Coords getValidCoordsInDirection(Square::Coords coords, 
+
+	int width;
+	int height;
+
+	struct Path {
+		Coords origin;
+		std::vector<Direction> directions;
+		int max;
+	} path;
+
+	std::vector<Square *> squares;
+	Coords focus;
+
+	std::vector<State> state;
+	
+	
+	Coords getValidCoordsInDirection(Coords coords, 
 		Direction direction, Unit *myUnit = NULL);
-	void calculatePossibleMoves(Square *selection, Unit *myUnit, int remaining);
-	void clearPossibleMoves();
-	void clearPath();
+	void setRadiusState(Coords selection, int radius, State state);
+	void calculateShortestPath();
+
+	
 };
 
 #endif

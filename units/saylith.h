@@ -8,7 +8,7 @@ class Saylith : public Unit {
 public:
 	Saylith();
 	
-	int getAttackDamage(Unit enemy, Terrain terrain);
+	//int getAttackDamage(Unit enemy, Terrain terrain);
 
 };
 

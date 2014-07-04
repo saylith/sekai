@@ -11,7 +11,7 @@
 
 
 Battle::Battle() {
-	bm = BattleMap(25, 10);
+	bm = BattleMap(true);
 	currentAction = UNIT_SELECTION;
 	turn = 0;
 	
@@ -53,6 +53,10 @@ std::string Battle::getMenu() {
 		ss << menu.at(i) << std::endl;
 	}
 	return ss.str();
+}
+
+std::vector<sf::Sprite> Battle::drawMap() {
+	return bm.getSprites();
 }
 
 void Battle::keyboardRight() {
@@ -136,11 +140,10 @@ switch(currentAction){
 void Battle::keyboardZ() {
 	switch(currentAction) {
 		case UNIT_SELECTION: {
-			
-			if (bm.confirm()->isSelected()) {
+			if (bm.getSquareAt(bm.getFocus())->isOccupied()) {
 				currentAction = UNIT_SELECTED;
 				menu = blankMenu;
-				bm.confirmUnitSelection();
+				bm.updateStateOnSelection();
 			}
 			else {
 				currentAction = MAIN_MENU;
@@ -151,13 +154,13 @@ void Battle::keyboardZ() {
 		case UNIT_SELECTED:
 			currentAction = UNIT_MENU;
 			menu = unitMenu;
-			bm.confirmUnitDestination();
 			break;
 		case UNIT_MENU:
 			if (unitMenuSelectionIndex == 0) {
 				currentAction = UNIT_SELECTION;
 				menu = blankMenu;
-				bm.confirmUnitWait();
+				bm.moveUnit();
+				bm.clearState();
 			}
 			break;
 		default:
@@ -173,12 +176,12 @@ switch(currentAction){
 		case UNIT_SELECTED:
 			currentAction = UNIT_SELECTION;
 			menu = blankMenu;
-			bm.cancelUnitSelection();
+			bm.setFocusToOrigin();
+			bm.clearState();
 			break;
 		case UNIT_MENU:
 			currentAction = UNIT_SELECTED;
 			menu = blankMenu;
-			bm.cancelUnitMenu();
 			break;
 		default:
 			break;

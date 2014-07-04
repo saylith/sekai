@@ -3,6 +3,7 @@
  */
 
 #include "unit.h"
+#include <SFML/Graphics.hpp>
 
 Unit::Stats Unit::getStats() {
     return this->stats;
@@ -150,10 +151,10 @@ BattleMap::Direction Unit::setDirection(BattleMap::Direction direction){
 	return this->direction = direction;
 }
 
-int Unit::getAttackDamage(Unit enemy, Terrain terrain)
-{
-    return 0;
-}
+// int Unit::getAttackDamage(Unit enemy, Terrain terrain)
+// {
+//     return 0;
+// }
 
 int Unit::getMovement()
 {

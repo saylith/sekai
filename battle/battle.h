@@ -33,6 +33,7 @@ public:
 
 	std::string getMap();
 	std::string getMenu();
+	std::vector<sf::Sprite> drawMap();
 
 	void keyboardRight();
 	void keyboardUp();

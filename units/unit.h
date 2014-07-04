@@ -1,8 +1,6 @@
 #ifndef UNIT_H
 #define UNIT_H
 
-#include "../map/terrain.h"
-#include "../map/battlemap.h"
 class Unit
 {
     public:
@@ -75,13 +73,16 @@ class Unit
         Status getStatus();
         Status setStatus(Status status);
 
-        int getAttackDamage(Unit enemy, Terrain terrain);
+     //   int getAttackDamage(Unit enemy, Square::Terrain terrain);
         int getMovement();
         char getRepresentation();
+        // sf::Sprite getSprite();
+
         bool isAce();
         bool setAce(bool ace);
         BattleMap::Direction getDirection();
         BattleMap::Direction setDirection(BattleMap::Direction direction);
+
 
     private:
         Stats stats;
@@ -92,7 +93,8 @@ class Unit
         Status status;
         BattleMap::Direction direction;
         bool ace;
-        // Terrain::TerrainBonuses terrainBonus;
+      //  sf::Sprite sprite;
+        //std::map<Square::Terrain, float> terrainBonus;
 
     protected:
         char representation;
