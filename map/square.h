@@ -18,13 +18,19 @@ public:
 		HIGHLIGHTED = 'h',
 		PATH = 'p',
 		NONE = '.'
-	} state;
+	};
 
 	struct Coords {
 		int x, y;	
-	} coords;
+	};
 
-	Square();
+private:
+	State state;
+	Coords coords;
+
+public:
+
+	Square();//I suspect this could easily cause issues in the future
 
 	Square(int x = 0, int y = 0,
 		Terrain terrain = Terrain(), 
