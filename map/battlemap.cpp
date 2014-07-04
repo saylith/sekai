@@ -21,7 +21,6 @@ BattleMap::BattleMap(bool testing) {
 	this->width = 4;
 	this->height = 10;
 	this->state = std::vector<BattleMap::State>(40, BattleMap::NONE);
-
 	for(int x = 0; x < width; x++) {
 		for(int y = 0; y < height; y++) {
 			Square *square = new Square();
@@ -73,12 +72,12 @@ BattleMap::State BattleMap::getStateAt(BattleMap::Coords coords) {
 	return this->getStateAt(coords.x, coords.y);
 }
 
-BattleMap::State BattleMap::setStateAt(BattleMap::State state, int x, int y) {
+BattleMap::State BattleMap::setStateAt(int x, int y, BattleMap::State state) {
 	return this->state.at(x*height + y) = state;
 }
 
-BattleMap::State BattleMap::setStateAt(BattleMap::State state, BattleMap::Coords coords) {
-	return this->setStateAt(state, coords.x, coords.y);
+BattleMap::State BattleMap::setStateAt(BattleMap::Coords coords, BattleMap::State state) {
+	return this->setStateAt(coords.x, coords.y, state);
 }
 
 BattleMap::Coords BattleMap::getFocus() {
@@ -104,14 +103,37 @@ BattleMap::Coords BattleMap::moveFocus(Direction direction) {
 	return this->setFocus(newCoords);
 }
 
-BattleMap::Coords BattleMap::moveUnit(BattleMap::Coords source, BattleMap::Coords dest) {
-	if(getSquareAt(source)->getUnit() == NULL) {
-		Unit *unit = getSquareAt(source)->getUnit();
-		getSquareAt(source)->setUnit(NULL);
-		getSquareAt(dest)->setUnit(unit);
-		return dest;
+BattleMap::Coords BattleMap::movePath(Direction direction) {
+	BattleMap::Coords newCoords = 
+		this->getValidCoordsInDirection(this->focus, direction);
+
+	if(getStateAt(newCoords) == BattleMap::ACCESSIBLE
+		|| getStateAt(newCoords) == BattleMap::REACHABLE
+		|| getStateAt(newCoords) == BattleMap::PATH) {
+
+		path.directions.push_back(direction);
+
+		for(BattleMap::Direction dir : path.directions)
+			std::cout << dir;
+		std::cout << std::endl;
+
+		moveFocus(direction);
 	}
-	return source;
+		
+}
+
+BattleMap::Coords BattleMap::moveUnit() {
+	Unit *unit = getSquareAt(path.origin)->getUnit();
+	getSquareAt(path.origin)->setUnit(NULL);
+
+	if(getStateAt(focus) == BattleMap::REACHABLE)
+		path.directions.pop_back();
+
+	Coords destination = path.origin;
+	for(BattleMap::Direction dir : path.directions)
+		destination = getValidCoordsInDirection(destination, dir);
+	getSquareAt(destination)->setUnit(unit);
+	return destination;
 }
 
 std::string BattleMap::printMap() {
@@ -150,16 +172,13 @@ std::vector<sf::Sprite> BattleMap::getSprites() {
 				// Set the color of the sprite based on focus/state
 				if(this->focus.x == x && this->focus.y == y) 
 					sprite.setColor(sf::Color(255,153,0));
-				else
-					switch(getStateAt(x,y)) {
+
+				else switch(getStateAt(x,y)) {
 						case ACCESSIBLE:
 							sprite.setColor(sf::Color(51, 102, 153));
 							break;
 						case REACHABLE:
 							sprite.setColor(sf::Color(255, 0, 0));
-							break;
-						case PATH:
-							sprite.setColor(sf::Color(146, 205, 0));
 							break;
 						default:
 							break;
@@ -202,6 +221,9 @@ void BattleMap::updateStateOnSelection() {
 	if(!getSquareAt(selection)->isOccupied()) 
 		return;
 
+	path.origin = focus;
+	path.max = getSquareAt(focus)->getUnit()->getMovement();
+
 	Unit *unit = getSquareAt(selection)->getUnit();
 
 	int radius = unit->getMovement() + 1;
@@ -213,7 +235,7 @@ void BattleMap::setRadiusState(Coords selection, int radius, BattleMap::State st
 	if (radius == 0)
 		return;
 
-	setStateAt(state, selection);
+	setStateAt(selection, state);
 
 	for(BattleMap::Direction dir : {BattleMap::NORTH, BattleMap::SOUTH, BattleMap::WEST, BattleMap::EAST}) {
 		BattleMap::Coords newCoord = getValidCoordsInDirection(selection, dir);
@@ -224,4 +246,11 @@ void BattleMap::setRadiusState(Coords selection, int radius, BattleMap::State st
 void BattleMap::clearState() {
 	this->state = std::vector<BattleMap::State>(
 		this->width * this->height, BattleMap::NONE);
+	path.origin = focus;
+	path.directions.clear();
+	path.max = 0;
+}
+
+void BattleMap::setFocusToOrigin() {
+	focus = path.origin;
 }

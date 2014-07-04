@@ -65,7 +65,7 @@ void Battle::keyboardRight() {
 			bm.moveFocus(BattleMap::EAST);
 			break;
 		case UNIT_SELECTED:
-		
+			bm.movePath(BattleMap::EAST);
 			break;
 		case MAIN_MENU:
 			mainMenuSelectionIndex = 
@@ -82,7 +82,7 @@ switch(currentAction){
 			bm.moveFocus(BattleMap::NORTH);
 			break;
 		case UNIT_SELECTED:
-
+			bm.movePath(BattleMap::NORTH);
 			break;
 		case MAIN_MENU:
 			mainMenuSelectionIndex = 
@@ -98,7 +98,7 @@ switch(currentAction){
 			bm.moveFocus(BattleMap::WEST);
 			break;
 		case UNIT_SELECTED:
-
+			bm.movePath(BattleMap::WEST);
 			break;
 		case MAIN_MENU:
 			mainMenuSelectionIndex = 
@@ -114,7 +114,7 @@ switch(currentAction){
 			bm.moveFocus(BattleMap::SOUTH);
 			break;
 		case UNIT_SELECTED:
-
+			bm.movePath(BattleMap::SOUTH);
 			break;
 		case MAIN_MENU:
 			mainMenuSelectionIndex = 
@@ -128,7 +128,6 @@ switch(currentAction){
 void Battle::keyboardZ() {
 	switch(currentAction) {
 		case UNIT_SELECTION: {
-			
 			if (bm.getSquareAt(bm.getFocus())->isOccupied()) {
 				currentAction = UNIT_SELECTED;
 				menu = blankMenu;
@@ -148,6 +147,8 @@ void Battle::keyboardZ() {
 			if (unitMenuSelectionIndex == 0) {
 				currentAction = UNIT_SELECTION;
 				menu = blankMenu;
+				bm.moveUnit();
+				bm.clearState();
 			}
 			break;
 		default:
@@ -163,6 +164,7 @@ switch(currentAction){
 		case UNIT_SELECTED:
 			currentAction = UNIT_SELECTION;
 			menu = blankMenu;
+			bm.setFocusToOrigin();
 			bm.clearState();
 			break;
 		case UNIT_MENU:
