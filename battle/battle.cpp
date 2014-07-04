@@ -67,6 +67,9 @@ void Battle::keyboardRight() {
 			mainMenuSelectionIndex = 
 				(mainMenuSelectionIndex + 1) % menu.size();
 			break;
+		case UNIT_SPIN:
+			bm.getFocus()->occupant->setDirection(BattleMap::EAST);
+			break;
 		default:
 			break;
 	}
@@ -84,6 +87,9 @@ switch(currentAction){
 			mainMenuSelectionIndex = 
 				(menu.size() + mainMenuSelectionIndex - 1) % menu.size();
 			break;
+		case UNIT_SPIN:
+			bm.getFocus()->occupant->setDirection(BattleMap::NORTH);
+			break;
 		default:
 			break;
 	}
@@ -100,6 +106,9 @@ switch(currentAction){
 			mainMenuSelectionIndex = 
 				(menu.size() + mainMenuSelectionIndex - 1) % menu.size();
 			break;
+		case UNIT_SPIN:
+			bm.getFocus()->occupant->setDirection(BattleMap::WEST);
+			break;
 		default:
 			break;
 	}
@@ -115,6 +124,9 @@ switch(currentAction){
 		case MAIN_MENU:
 			mainMenuSelectionIndex = 
 				(mainMenuSelectionIndex + 1) % menu.size();
+			break;
+		case UNIT_SPIN:
+			bm.getFocus()->occupant->setDirection(BattleMap::SOUTH);
 			break;
 		default:
 			break;

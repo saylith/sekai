@@ -8,6 +8,7 @@ class Battle
 	enum Action {
 		UNIT_SELECTION, 
 		UNIT_SELECTED, 
+		UNIT_SPIN,
 		UNIT_MENU, 
 		MAIN_MENU, 
 		BUSY
