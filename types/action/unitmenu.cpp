@@ -10,16 +10,16 @@ UnitMenu::UnitMenu(Battle *b) {
 }
 
 void UnitMenu::doRight(Battle *b) {
-    //b->menuSelectionDown();
+    b->menuSelectionDown();
 }
 void UnitMenu::doUp(Battle *b) {
-    //b->menuSelectionUp();
+    b->menuSelectionUp();
 }
 void UnitMenu::doLeft(Battle *b) {
-    //b->menuSelectionUp();
+    b->menuSelectionUp();
 }
 void UnitMenu::doDown(Battle *b) {
-    //b->menuSelectionDown();
+    b->menuSelectionDown();
 }
 void UnitMenu::doZ(Battle *b) {
  //    Should be able to select based on index
@@ -27,11 +27,11 @@ void UnitMenu::doZ(Battle *b) {
  //    if(index == 0) {
 	// 	b->setAction(UNIT_SPIN);
 	// }
-    b->setMenu(std::vector<std::string>());
+    b->menuSelectionClear();
     b->setAction(new UnitSpin(b));
 }
 void UnitMenu::doX(Battle *b) {
-    b->setMenu(std::vector<std::string>());
+    b->menuSelectionClear();
     b->setAction(new UnitSelected(b));
     
 }

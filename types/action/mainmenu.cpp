@@ -12,22 +12,22 @@ MainMenu::MainMenu(Battle *b) {
 }
 
 void MainMenu::doRight(Battle *b) {
-    //b->menuSelectionDown();
+    b->menuSelectionDown();
 }
 void MainMenu::doUp(Battle *b) {
-    //b->menuSelectionUp();
+    b->menuSelectionUp();
 }
 void MainMenu::doLeft(Battle *b) {
-    //b->menuSelectionUp();
+    b->menuSelectionUp();
 }
 void MainMenu::doDown(Battle *b) {
-    //b->menuSelectionDown();
+    b->menuSelectionDown();
 }
 void MainMenu::doZ(Battle *b) {
     // Should be able to select based on index
     //int index = b->getMenuIndex();
 }
 void MainMenu::doX(Battle *b) {
-	b->setMenu(std::vector<std::string>());
+	b->menuSelectionClear();
     b->setAction(new UnitSelection(b));
 }

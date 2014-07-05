@@ -14,11 +14,7 @@ class Battle
 	int numPlayers;
 
 	std::vector<std::string> menu;
-	std::vector<std::string> blankMenu;
-	std::vector<std::string> mainMenu;
-	std::vector<std::string> unitMenu;
-	int mainMenuSelectionIndex;
-	int unitMenuSelectionIndex;
+	int menuSelectionIndex;
 
 	Action *action;
 
@@ -39,5 +35,9 @@ public:
 	void keyboardX();
 	void keyboardA();
 	void keyboardS();
+
+	int menuSelectionUp();
+	int menuSelectionDown();
+	int menuSelectionClear();
 };
 #endif

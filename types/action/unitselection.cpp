@@ -33,8 +33,5 @@ void UnitSelection::doZ(Battle *b) {
     }
 }
 void UnitSelection::doX(Battle *b) {
-    b->setAction(new UnitSelection(b));
-    b->getBattleMap()->setFocusToOrigin();
-    b->getBattleMap()->clearState();
 }
 

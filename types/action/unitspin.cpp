@@ -13,25 +13,27 @@ UnitSpin::UnitSpin(Battle *b) {
 }
 
 void UnitSpin::doRight(Battle *b) {
-    //b->menuSelectionDown();
+    b->menuSelectionDown();
 }
 void UnitSpin::doUp(Battle *b) {
-    //b->menuSelectionUp();
+    b->menuSelectionUp();
 }
 void UnitSpin::doLeft(Battle *b) {
-    //b->menuSelectionUp();
+    b->menuSelectionUp();
 }
 void UnitSpin::doDown(Battle *b) {
-    //b->menuSelectionDown();
+    b->menuSelectionDown();
 }
 void UnitSpin::doZ(Battle *b) {
     // Should confirm spin
-    b->setMenu(std::vector<std::string>());
+    b->menuSelectionClear();
+    b->getBattleMap()->moveUnit();
+    b->getBattleMap()->clearState();
     b->setAction(new UnitSelection(b));
 
 }
 void UnitSpin::doX(Battle *b) {
-    b->setMenu(std::vector<std::string>());
+    b->menuSelectionClear();
     b->setAction(new UnitMenu(b));
     
 }

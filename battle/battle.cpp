@@ -16,21 +16,8 @@ Battle::Battle() {
 	bm = BattleMap(true);
 	// currentAction = UNIT_SELECTION;
 	turn = 0;
-	
-	blankMenu = std::vector<std::string>();
-	
-	mainMenu = std::vector<std::string>();
-	mainMenu.push_back("Unit List");
-	mainMenu.push_back("Conditions");
-	mainMenu.push_back("Suspend");
-	mainMenu.push_back("End Turn");
 
-	unitMenu = std::vector<std::string>();
-	unitMenu.push_back("Wait");
-
-	menu = blankMenu;
-	mainMenuSelectionIndex = 0;
-	unitMenuSelectionIndex = 0;
+	int menuSelectionIndex;
 	action = new UnitSelection(this);
 }
 
@@ -43,7 +30,6 @@ void Battle::setMenu(std::vector<std::string> string) {
 }
 
 std::string Battle::getMenu() {
-	int menuSelectionIndex;
 	// if(currentAction == MAIN_MENU)
 	// 	menuSelectionIndex = mainMenuSelectionIndex;
 	// else if(currentAction == UNIT_MENU)
@@ -61,6 +47,20 @@ std::string Battle::getMenu() {
 	}
 	return ss.str();
 }
+
+int Battle::menuSelectionUp() {
+	return menuSelectionIndex = (menuSelectionIndex - 1) % menu.size();
+}
+
+int Battle::menuSelectionDown() {
+	return menuSelectionIndex = (menu.size() + menuSelectionIndex + 1) % menu.size();
+}
+
+int Battle::menuSelectionClear() {
+	setMenu(std::vector<std::string>());
+	return menuSelectionIndex = 0;
+}
+
 
 std::vector<sf::Sprite> Battle::drawMap() {
 	return bm.getSprites();
