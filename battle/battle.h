@@ -2,18 +2,12 @@
 #define BATTLE_H
 
 #include "../map/battlemap.h"
+#include "../types/action/action.h"
+#include <string>
+#include <vector>
 
 class Battle
 {
-	/*enum Action { // to be made a class
-		UNIT_SELECTION, 
-		UNIT_SELECTED, 
-		UNIT_SPIN,
-		UNIT_MENU, 
-		MAIN_MENU, 
-		BUSY
-	};*/
-
 	BattleMap bm;
 	
 	int turn;
@@ -26,7 +20,7 @@ class Battle
 	int mainMenuSelectionIndex;
 	int unitMenuSelectionIndex;
 
-	Action currentAction;
+	Action *action;
 
 public:
 	Battle();
@@ -34,7 +28,9 @@ public:
 	std::string getMap();
 	std::string getMenu();
 	std::vector<sf::Sprite> drawMap();
-
+	BattleMap *getBattleMap();
+	void setAction(Action *action);
+	void setMenu(std::vector<std::string> string);
 	void keyboardRight();
 	void keyboardUp();
 	void keyboardDown();

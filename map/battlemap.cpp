@@ -104,6 +104,7 @@ BattleMap::Coords BattleMap::moveFocus(Direction direction) {
 }
 
 BattleMap::Coords BattleMap::movePath(Direction direction) {
+	std::cout << "moving" << std::endl;
 	BattleMap::Coords newCoords = 
 		this->getValidCoordsInDirection(this->focus, direction);
 

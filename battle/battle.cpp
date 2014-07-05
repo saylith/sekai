@@ -9,10 +9,12 @@
 #include <sstream>
 #include <iostream>
 
+#include "../types/action/action.h"
+#include "../types/action/unitselection.h"
 
 Battle::Battle() {
 	bm = BattleMap(true);
-	currentAction = UNIT_SELECTION;
+	// currentAction = UNIT_SELECTION;
 	turn = 0;
 	
 	blankMenu = std::vector<std::string>();
@@ -29,18 +31,23 @@ Battle::Battle() {
 	menu = blankMenu;
 	mainMenuSelectionIndex = 0;
 	unitMenuSelectionIndex = 0;
+	action = new UnitSelection(this);
 }
 
 std::string Battle::getMap() {
 	return bm.printMap();
 }
 
+void Battle::setMenu(std::vector<std::string> string) {
+	menu = string;
+}
+
 std::string Battle::getMenu() {
 	int menuSelectionIndex;
-	if(currentAction == MAIN_MENU)
-		menuSelectionIndex = mainMenuSelectionIndex;
-	else if(currentAction == UNIT_MENU)
-		menuSelectionIndex = unitMenuSelectionIndex;
+	// if(currentAction == MAIN_MENU)
+	// 	menuSelectionIndex = mainMenuSelectionIndex;
+	// else if(currentAction == UNIT_MENU)
+	// 	menuSelectionIndex = unitMenuSelectionIndex;
 	if(menu.size() == 0)
 		return "";
 
@@ -59,133 +66,36 @@ std::vector<sf::Sprite> Battle::drawMap() {
 	return bm.getSprites();
 }
 
-void Battle::keyboardRight() {
-	switch(currentAction){
-		case UNIT_SELECTION:
-			bm.moveFocus(BattleMap::EAST);
-			break;
-		case UNIT_SELECTED:
-			bm.movePath(BattleMap::EAST);
-			break;
-		case MAIN_MENU:
-			mainMenuSelectionIndex = 
-				(mainMenuSelectionIndex + 1) % menu.size();
-			break;
-		case UNIT_SPIN:
-			bm.setUnitDirection(BattleMap::EAST);
-			break;
-		default:
-			break;
-	}
+BattleMap *Battle::getBattleMap() {
+	return &bm;
+}
+
+void Battle::setAction(Action *action) {
+
+	if(this->action != NULL)
+		free(this->action);
+	this->action = action;
 
 }
+
+void Battle::keyboardRight() {
+	action->doRight(this);
+}
 void Battle::keyboardUp() {
-switch(currentAction){
-		case UNIT_SELECTION:
-			bm.moveFocus(BattleMap::NORTH);
-			break;
-		case UNIT_SELECTED:
-			bm.movePath(BattleMap::NORTH);
-			break;
-		case MAIN_MENU:
-			mainMenuSelectionIndex = 
-				(menu.size() + mainMenuSelectionIndex - 1) % menu.size();
-			break;
-		case UNIT_SPIN:
-			bm.setUnitDirection(BattleMap::NORTH);
-			break;
-		default:
-			break;
-	}
+	action->doUp(this);
 }
 void Battle::keyboardLeft() {
-switch(currentAction){
-		case UNIT_SELECTION:
-			bm.moveFocus(BattleMap::WEST);
-			break;
-		case UNIT_SELECTED:
-			bm.movePath(BattleMap::WEST);
-			break;
-		case MAIN_MENU:
-			mainMenuSelectionIndex = 
-				(menu.size() + mainMenuSelectionIndex - 1) % menu.size();
-			break;
-		case UNIT_SPIN:
-			bm.setUnitDirection(BattleMap::WEST);
-			break;
-		default:
-			break;
-	}
+	action->doLeft(this);
 }
 void Battle::keyboardDown() {
-switch(currentAction){
-		case UNIT_SELECTION:
-			bm.moveFocus(BattleMap::SOUTH);
-			break;
-		case UNIT_SELECTED:
-			bm.movePath(BattleMap::SOUTH);
-			break;
-		case MAIN_MENU:
-			mainMenuSelectionIndex = 
-				(mainMenuSelectionIndex + 1) % menu.size();
-			break;
-		case UNIT_SPIN:
-			bm.setUnitDirection(BattleMap::SOUTH);
-			break;
-		default:
-			break;
-	}
+	action->doDown(this);
 }
 
 void Battle::keyboardZ() {
-	switch(currentAction) {
-		case UNIT_SELECTION: {
-			if (bm.getSquareAt(bm.getFocus())->isOccupied()) {
-				currentAction = UNIT_SELECTED;
-				menu = blankMenu;
-				bm.updateStateOnSelection();
-			}
-			else {
-				currentAction = MAIN_MENU;
-				menu = mainMenu;
-			}
-			break;
-		}
-		case UNIT_SELECTED:
-			currentAction = UNIT_MENU;
-			menu = unitMenu;
-			break;
-		case UNIT_MENU:
-			if (unitMenuSelectionIndex == 0) {
-				currentAction = UNIT_SELECTION;
-				menu = blankMenu;
-				bm.moveUnit();
-				bm.clearState();
-			}
-			break;
-		default:
-			break;
-	}
+	action->doZ(this);
 }
 void Battle::keyboardX() {
-switch(currentAction){
-		case MAIN_MENU:
-			currentAction = UNIT_SELECTION;
-			menu = blankMenu;
-			break;
-		case UNIT_SELECTED:
-			currentAction = UNIT_SELECTION;
-			menu = blankMenu;
-			bm.setFocusToOrigin();
-			bm.clearState();
-			break;
-		case UNIT_MENU:
-			currentAction = UNIT_SELECTED;
-			menu = blankMenu;
-			break;
-		default:
-			break;
-	}
+	action->doX(this);
 }
 void Battle::keyboardA() {
 

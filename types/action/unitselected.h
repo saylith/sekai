@@ -5,8 +5,18 @@
 #ifndef UNITSELECTED_H
 #define UNITSELECTED_H
 
-class unitSelected : public action {
+#include "action.h"
 
+class UnitSelected : public Action {
+public:
+	UnitSelected(Battle *b);
+    void doRight(Battle *b);
+    void doUp(Battle *b);
+    void doLeft(Battle *b);
+    void doDown(Battle *b);
+   
+    void doZ(Battle *b);
+    void doX(Battle *b);
 };
 
 
